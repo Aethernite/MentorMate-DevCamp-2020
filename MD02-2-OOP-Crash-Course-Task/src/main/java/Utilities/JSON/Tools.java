@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class Tools {
 
-    public static JSONObject convertFiguresToJSON(List<Figure> figures){
+    public static JSONObject serializeFiguresToJSON(List<Figure> figures){
         JSONObject json = new JSONObject();
         JSONArray array = new JSONArray();
         for (Figure figure : figures) {
@@ -43,7 +43,7 @@ public class Tools {
     }
 
     public static void exportJSONData(List<Figure> figures, String output) throws IOException {
-        JSONObject data = convertFiguresToJSON(figures);
+        JSONObject data = serializeFiguresToJSON(figures);
         exportToOutputFile(data,output);
     }
 
@@ -53,14 +53,14 @@ public class Tools {
         return (JSONObject)parser.parse(file);
     }
 
-    public static List<Figure> extractFiguresFromJSON(JSONArray figuresJSON) {
+    public static List<Figure> deserializeFiguresFromJSON(JSONArray figuresJSON) {
         List<Figure> figures = new ArrayList<>();
         for (Object value : figuresJSON) {
             JSONObject obj = (JSONObject) value;
             JSONArray coordinatesJSON = (JSONArray) obj.get("coordinates");
             String id = (String) obj.get("id");
             String type = (String) obj.get("type");
-            List<Coordinates> coordinates = extractCoordinatesFromJSON(coordinatesJSON);
+            List<Coordinates> coordinates = deserializeCoordinatesFromJSON(coordinatesJSON);
             Figure figure = FigureFactory.getFigure(id, type, coordinates);
             figures.add(figure);
         }
@@ -68,7 +68,7 @@ public class Tools {
     }
 
 
-    public static List<Coordinates> extractCoordinatesFromJSON(JSONArray coordinates) {
+    public static List<Coordinates> deserializeCoordinatesFromJSON(JSONArray coordinates) {
         List<Coordinates> list = new ArrayList<Coordinates>();
         for (Object o : coordinates) {
             JSONObject coordinatesObject = (JSONObject) o;

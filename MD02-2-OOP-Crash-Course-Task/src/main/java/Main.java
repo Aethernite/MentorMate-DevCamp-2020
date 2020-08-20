@@ -1,4 +1,5 @@
 import Figures.Figure;
+import Figures.Square;
 import Utilities.JSON.Tools;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -22,7 +23,7 @@ public class Main {
     public void start() throws IOException, ParseException {
         JSONObject dataJSON = Tools.extractDataJSON(input);
         JSONArray figuresJSON = (JSONArray) dataJSON.get("figures");
-        List<Figure> figures = Tools.extractFiguresFromJSON(figuresJSON);
+        List<Figure> figures = Tools.deserializeFiguresFromJSON(figuresJSON);
         Tools.exportJSONData(figures, output);
     }
 
