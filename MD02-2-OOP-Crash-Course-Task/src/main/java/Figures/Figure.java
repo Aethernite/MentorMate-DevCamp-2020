@@ -3,7 +3,9 @@ package Figures;
 import Utilities.Coordinates;
 
 import java.util.List;
-
+/**
+ * Abstract Class Figure
+ */
 public abstract class Figure implements Calculable {
     protected String id;
     protected String type;
