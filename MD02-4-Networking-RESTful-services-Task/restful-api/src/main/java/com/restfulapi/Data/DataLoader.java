@@ -15,7 +15,7 @@ import java.util.List;
 
 @Component
 public class DataLoader implements ApplicationRunner {
-    private final static String PATH = "sample-data.json";
+    private final static String PATH = "./sample-data.json";
     private final BookRepository bookRepository;
 
     @Autowired
