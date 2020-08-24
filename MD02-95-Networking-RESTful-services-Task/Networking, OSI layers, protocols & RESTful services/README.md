@@ -1,11 +1,14 @@
 # 1. Describe the process of how would you check if a server OR a service (http, http over tls, icmp) on a server is running?
 
-##### The process is simple. You can use many tools already integrated in your system.
-##### Many simple commands exist for testing different protocols individually but for this homework I decided to use a tool that scans the whole network for open ports and services. The tool is called **nmap**. Sample commands for testing if server is running:
+The process is simple. You can use many tools already integrated in your system.
+ Many simple commands exist for testing different protocols individually but for this homework I decided to use a tool that scans the whole network for open ports and services. The tool is called **nmap**. Sample commands for testing if service is running:
 &nbsp;
 ```
-ping <address>
-curl -v <address>
+ping <address>      <--- Tests if host is reachable by sending packets through Internet Protocol
+curl -v <address>   <--- Tests if host is reachable by HTTP
+telnet <address> <port> <--- Tests if host is reachable by SSH/TCP service on the current port
+nc -z -v <address> <port> <--- Tests if host is reachable by TCP on the current port
+nc -z -v -u <address> <port> <--- Tests if host is reachable by UDP on the current port
 ```
 &nbsp;
 # 2. What services are running on the mentormate gitlab server (i.e. gitlab.mentormate.bg) when you are connected to the VPN and when you are not connected to it?
@@ -61,5 +64,6 @@ Nmap done: 1 IP address (1 host up) scanned in 5.04 seconds
 
 The same services are running on the server and it doesn't matter if you are using VPN or not.
 The thing is that the server uses HSTS. It first tries to verify your network before giving you a response.
+The server checks the network origin and If the network is allowed on the server, then the server returns page you  want to access.
 
 >HTTP Strict Transport Security (HSTS) is a web security policy mechanism that helps to protect websites against man-in-the-middle attacks such as protocol downgrade attacks[1] and cookie hijacking. It allows web servers to declare that web browsers (or other complying user agents) should automatically interact with it using only HTTPS connections, which provide Transport Layer Security (TLS/SSL), unlike the insecure HTTP used alone. HSTS is an IETF standards track protocol and is specified in RFC 6797.
