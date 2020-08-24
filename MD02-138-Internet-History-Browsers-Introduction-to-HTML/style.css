@@ -1,4 +1,4 @@
-
+@import "responsive-style.css";
 * {
   box-sizing: border-box;
   padding: 0px;
@@ -22,66 +22,71 @@ header {
   color: white;
 }
 
+
 article img{
-  max-width:400px;
-  max-heigth:400px;
+  max-width:395px;
   border-radius:50%;
   padding: 10px;
   display:inline-block;
 }
 
-/* Create two columns/boxes that floats next to each other */
+
+/* Styling the nav-bar to float left */
 aside {
-  float: left;
   max-width: 200px;
   background: #191a1c;
   padding: 20px;
   height:100%;
+  background-color: #111; /* Black */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  float: left;
 }
 
 /* Style the list inside the menu */
 aside ul {
   list-style-type: none;
-  padding: 0;
 }
 
 aside ul li{
   padding-top:20px;
-  
 }
 
+/* Styling the "Buttons" */
+aside a{
+    margin-top: 10%;
+    margin-left: 10%;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+}
+
+aside a:hover {
+    color: #f1f1f1;
+}
+
+
+/*Section overflows due to the images*/
+section{
+  overflow: visible;
+  overflow-x: hidden;
+  height: 100%;
+}
 
 article {
-  float: left;
   padding: 20px;
-  width: 70%;
   background-color: white;
-}
-
-
-
-article p{
-  width: 100%;
-}
-
-section{
-  height:100%;
-}
-/* Clear floats after the columns */
-section:after {
-  content: "";
-  display: table;
-  clear: both;
 }
 
 /* Style the footer */
 footer {
   background-color: #0d0d0d;
-  position: fixed;
+  position: absolute;
   padding: 10px;
   text-align: center;
   color: white;
-  bottom: 0;
+  display: block;
   width: 100%;
 }
 
@@ -93,90 +98,6 @@ footer p{
   color: white; 
   text-decoration:none; 
   cursor:pointer;  
-}
-
-article img{
-  max-width:400px;
-  max-heigth:400px;
-}
-
-.center-fit {
-            max-width: 100%;
-            max-height: 100vh;
-            margin: auto;
-        }
-
-
-/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
-@media (max-width: 600px) {
-  aside {
-    visibility: hidden;
-	  display: none;
-  }
-  
-  .article-content p{
-    padding-left: 20%;
-  }
-  
-  .article-content h1{
-    text-align: center;
-  }
-}
-
-section aside a{
-    margin-top: 10%;
-    margin-left: 10%;
-    text-decoration: none;
-    font-family: 'Roboto', sans-serif;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-}
-section aside a:hover {
-    color: #f1f1f1;
-}
-
-@media(max-width:1920px){
-  article img{
-    width: 30%;
-    heigth: 30%;
-  }
-  
-}
-
-@media ( max-width: 1280px ){
-  .image-box{
-    display:grid;
-    grid-template-columns: repeat(2, 1fr);
-  }
-  article img{
-    width: 80%;
-  }
-}
-
-@media ( max-width: 800px ){
-  .image-box{
-    display:block;
-  }
-  article img{
-    width: 60%;
-  }
-}
-
-
-@media (max-width: 600px) {
-  aside {
-    visibility: hidden;
-	  display: none;
-  }
-  
-  .image-box{
-    margin-left:0%;
-    margin-right:-100%;
-  }
-  
-  
-  
 }
 
 
