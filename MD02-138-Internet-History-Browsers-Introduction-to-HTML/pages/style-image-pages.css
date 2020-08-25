@@ -1,0 +1,103 @@
+@import "responsive-images.css";
+* {
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Style the header */
+header {
+  background: #0d0d0d;
+  padding: 10px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+
+
+article img{
+  transform: scale(1);
+  height: 100%;
+  display:inline-block;
+}
+
+
+/* Styling the nav-bar to float left */
+aside {
+  max-width: 200px;
+  background: #191a1c;
+  padding: 20px;
+  height:100%;
+  background-color: #111; /* Black */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  float: left;
+}
+
+/* Style the list inside the menu */
+aside ul {
+  list-style-type: none;
+}
+
+aside ul li{
+  padding-top:20px;
+}
+
+/* Styling the "Buttons" */
+aside a{
+    margin-top: 10%;
+    margin-left: 10%;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+}
+
+aside a:hover {
+    color: #f1f1f1;
+}
+
+
+/*Section overflows due to the images*/
+section{
+  overflow: visible;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  height: 100%;
+}
+
+article {
+  padding: 20px;
+  background-color: white;
+}
+
+/* Style the footer */
+footer {
+  background-color: #0d0d0d;
+  position: absolute;
+  padding: 10px;
+  text-align: center;
+  color: white;
+  display: block;
+  width: 100%;
+}
+
+footer p{
+  display: inline-block;
+  text-align: centered;
+  padding-left: 5%;
+  text-decoration: none;
+  color: white; 
+  text-decoration:none; 
+  cursor:pointer;  
+}
+
+
