@@ -16,7 +16,7 @@
 
 # 2. Seed data
 - :heavy_check_mark: a) Add the minimum number of enabled menu items that you need to cover the requirements. It’s not necessary to add tens or hundreds. You should have at least one disabled menu item.
-- :heavy_check_mark:b) Add at least 3 orders/recipes with at least one menu item with a changed price at least 2 times (an order with initial menu item price, an order with the same menu item and fist price update and other order with the same menu item second price update - no duplicated prices).
+- :heavy_check_mark: b) Add at least 3 orders/recipes with at least one menu item with a changed price at least 2 times (an order with initial menu item price, an order with the same menu item and fist price update and other order with the same menu item second price update - no duplicated prices).
 
 # 3. Reports: (SQL SELECT queries and SQL views):
 - :heavy_check_mark: a) Menu list - select all enabled menu items
