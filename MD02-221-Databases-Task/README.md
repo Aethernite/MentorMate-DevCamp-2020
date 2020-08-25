@@ -7,10 +7,10 @@
  
 - :heavy_check_mark: b) Each menu item should have at least identifier, unique name, type, a picture (absolute or relative path/URL to the file location), description, ingredients, price, is enabled flag. 
 - :heavy_check_mark: c) Orders/Receipts history - date and time, menu items with quantities and prices, order/receipt number, final/total price. Keep in mind that the menu item’s price may change and we need to keep track of the price at the moment of the order/recipe created.
-- :heavy_check_mark: d) (Optional) Should be possible to create, edit, and deactivate tables. Each table should have a unique name.
-- :question: e) (Optional) Create stored procedures for:
-    - :x: Should be possible to assign menu items to a table. 
-    - :x: Should be possible to assign an order/receipt to a table and restart the purchases of the table.
+- :question: d) (Optional) Should be possible to create, edit, and deactivate tables. Each table should have a unique name.
+- :x: e) (Optional) Create stored procedures for:
+    - Should be possible to assign menu items to a table. 
+    - Should be possible to assign an order/receipt to a table and restart the purchases of the table.
  - :x: f) (Optional) Should be possible to group smaller sets of menus (like lunch menu or happy hour menu), that can be displayed on monitors in the restaurant and should be available in a given time (example: from 12:00 to 14:00). These groups should support their own price as a group.
 
 
