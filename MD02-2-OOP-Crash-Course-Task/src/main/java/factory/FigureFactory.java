@@ -1,10 +1,10 @@
-package Factory;
+package factory;
 
-import Figures.Figure;
-import Figures.Rectangle;
-import Figures.Square;
-import Figures.Triangle;
-import Utilities.Coordinates;
+import figure.Figure;
+import figure.Rectangle;
+import figure.Square;
+import figure.Triangle;
+import utils.Coordinates;
 
 import java.util.List;
 

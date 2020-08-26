@@ -1,4 +1,4 @@
-package Utilities;
+package utils;
 
 public class Coordinates {
     public long x;

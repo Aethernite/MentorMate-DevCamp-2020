@@ -1,6 +1,6 @@
-package Figures;
+package figure;
 
-import Utilities.Coordinates;
+import utils.Coordinates;
 import java.util.List;
 
 

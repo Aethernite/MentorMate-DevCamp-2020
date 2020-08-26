@@ -1,11 +1,8 @@
-package Figures;
+package figure;
 
-import Utilities.Coordinates;
+import utils.Coordinates;
 
-import java.math.BigDecimal;
 import java.util.List;
-
-import static java.lang.Math.sqrt;
 
 public class Rectangle extends Figure {
     public Rectangle(String id, List<Coordinates> coordinates) {

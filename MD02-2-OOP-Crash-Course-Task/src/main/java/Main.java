@@ -1,9 +1,9 @@
-import Figures.Figure;
-import Figures.Square;
-import Utilities.JSON.Tools;
+
+import utils.json.Tools;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
+import figure.*;
 
 import java.io.*;
 import java.util.*;

@@ -1,4 +1,4 @@
-package Figures;
+package figure;
 
 public interface Calculable {
     public abstract double calculateArea();

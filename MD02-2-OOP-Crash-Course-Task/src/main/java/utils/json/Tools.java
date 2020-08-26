@@ -1,8 +1,8 @@
-package Utilities.JSON;
+package utils.json;
 
-import Factory.FigureFactory;
-import Figures.Figure;
-import Utilities.Coordinates;
+import factory.FigureFactory;
+import figure.Figure;
+import utils.Coordinates;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.json.simple.JSONArray;
