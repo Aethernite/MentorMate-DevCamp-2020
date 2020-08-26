@@ -7,7 +7,7 @@
  
 - :heavy_check_mark: b) Each menu item should have at least identifier, unique name, type, a picture (absolute or relative path/URL to the file location), description, ingredients, price, is enabled flag. 
 - :heavy_check_mark: c) Orders/Receipts history - date and time, menu items with quantities and prices, order/receipt number, final/total price. Keep in mind that the menu item’s price may change and we need to keep track of the price at the moment of the order/recipe created.
-- :question: d) (Optional) Should be possible to create, edit, and deactivate tables. Each table should have a unique name.
+- :heavy_check_mark: d) (Optional) Should be possible to create, edit, and deactivate tables. Each table should have a unique name.
 - :x: e) (Optional) Create stored procedures for:
     - Should be possible to assign menu items to a table. 
     - Should be possible to assign an order/receipt to a table and restart the purchases of the table.
@@ -31,6 +31,8 @@
 - :heavy_check_mark: e) Search sold menu items for the last month - select all sold menu items for the period and show aggregated quantity and aggregated price for all sales. Group the result - every matching menu item should exist once into the result and for this menu item should show the total count and total price of sold items for the period. Keep in mind that the menu item’s price could be changed multiple times during the period.
   - :heavy_check_mark: (Optional) Create a SQL view for that search. Add a query to select data from that view.
 - f) :heavy_check_mark: Add index on the appropriate places
-- g) :x: (Optional) Add audit log functionality to track changes on the menu items table (create a new table to store, a user id (any number as users are not part of this task), action, a short description and create a stored procedure that will insert data to this table. The stored procedure will be called/executed manually)
+- g) :heavy_check_mark: (Optional) Add audit log functionality to track changes on the menu items table (create a new table to store, a user id (any number as users are not part of this task), action, a short description ~~and create a stored procedure that will insert data to this table~~. ~~The stored procedure will be called/executed manually~~
+> Instead of procedure I created a trigger that triggers on update on the table with products
+
 
 ---

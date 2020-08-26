@@ -11,31 +11,31 @@ INSERT INTO `restaurant`.`ingredient` (`name`) VALUES ('Rum');
 INSERT INTO `restaurant`.`ingredient` (`name`) VALUES ('Beans');
 
 -- Product insertion and ingredients <SANDWICH> with <Cheese>, <Ham>, <Bread>
-INSERT INTO `restaurant`.`product` (`active`, `description`, `ImagePath`, `name`, `price`, `type`) VALUES (b'1', 'Itallian morning sandwich', 'imgurl', 'Club Sandwich', '4.00', 'MEAL');
+INSERT INTO `restaurant`.`product` (`is_enabled`, `description`, `image_path`, `name`, `price`, `type`) VALUES (b'1', 'Itallian morning sandwich', 'imgurl', 'Club Sandwich', '4.00', 'MEAL');
 INSERT INTO `restaurant`.`product_ingredient` (`product_id`, `ingredient_id`) VALUES ('1', '4');
 INSERT INTO `restaurant`.`product_ingredient` (`product_id`, `ingredient_id`) VALUES ('1', '1');
 INSERT INTO `restaurant`.`product_ingredient` (`product_id`, `ingredient_id`) VALUES ('1', '3');
 
 -- Product insertion and ingredients <Mojito> with <Sugar>, <Lime>, <Water>, <Rum>
-INSERT INTO `restaurant`.`product` (`active`, `description`, `ImagePath`, `name`, `price`, `type`) VALUES (b'0', 'Icy summer cocktail', 'imgurl', 'Mojito', '6.50', 'ALCOHOLIC_DRINK');
+INSERT INTO `restaurant`.`product` (`is_enabled`, `description`, `image_path`, `name`, `price`, `type`) VALUES (b'0', 'Icy summer cocktail', 'imgurl', 'Mojito', '6.50', 'ALCOHOLIC_DRINK');
 INSERT INTO `restaurant`.`product_ingredient` (`product_id`, `ingredient_id`) VALUES ('2', '6');
 INSERT INTO `restaurant`.`product_ingredient` (`product_id`, `ingredient_id`) VALUES ('2', '7');
 INSERT INTO `restaurant`.`product_ingredient` (`product_id`, `ingredient_id`) VALUES ('2', '8');
 INSERT INTO `restaurant`.`product_ingredient` (`product_id`, `ingredient_id`) VALUES ('2', '9');
 
 -- Product insertion and ingredients <English Breakfast> with <Ham>, <Tomatoes>, <Eggs>, <Beans>
-INSERT INTO `restaurant`.`product` (`active`, `description`, `ImagePath`, `name`, `price`, `type`) VALUES (b'1', 'Welcome to england!', 'imgurl', 'English Breakfast', '5.50', 'MEAL');
+INSERT INTO `restaurant`.`product` (`is_enabled`, `description`, `image_path`, `name`, `price`, `type`) VALUES (b'1', 'Welcome to england!', 'imgurl', 'English Breakfast', '5.50', 'MEAL');
 INSERT INTO `restaurant`.`product_ingredient` (`product_id`, `ingredient_id`) VALUES ('3', '1');
 INSERT INTO `restaurant`.`product_ingredient` (`product_id`, `ingredient_id`) VALUES ('3', '2');
 INSERT INTO `restaurant`.`product_ingredient` (`product_id`, `ingredient_id`) VALUES ('3', '5');
 INSERT INTO `restaurant`.`product_ingredient` (`product_id`, `ingredient_id`) VALUES ('3', '10');
 
 -- Working Tables insertion
-INSERT INTO `restaurant`.`work_table` (`table_code`) VALUES ('TB-100');
-INSERT INTO `restaurant`.`work_table` (`table_code`) VALUES ('TB-101');
-INSERT INTO `restaurant`.`work_table` (`table_code`) VALUES ('TB-102');
-INSERT INTO `restaurant`.`work_table` (`table_code`) VALUES ('TB-103');
-INSERT INTO `restaurant`.`work_table` (`table_code`) VALUES ('TB-104');
+INSERT INTO `restaurant`.`work_table` (`table_code`,`is_busy`) VALUES ('TB-100',b'1');
+INSERT INTO `restaurant`.`work_table` (`table_code`,`is_busy`) VALUES ('TB-101',b'0');
+INSERT INTO `restaurant`.`work_table` (`table_code`,`is_busy`) VALUES ('TB-102',b'0');
+INSERT INTO `restaurant`.`work_table` (`table_code`,`is_busy`) VALUES ('TB-103',b'0');
+INSERT INTO `restaurant`.`work_table` (`table_code`,`is_busy`) VALUES ('TB-104',b'0');
 
 -- Item insertions (Item is a product plus the ordered quantity)
 INSERT INTO `restaurant`.`item` (`quantity`, `product_id`, `price_per_product`) VALUES ('1', '3', '5.50'); -- 1x English Breakfast

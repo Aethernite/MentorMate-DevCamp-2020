@@ -32,12 +32,12 @@ USE restaurant;
 
     CREATE TABLE product (
        id INTEGER NOT NULL AUTO_INCREMENT,
-        ACTIVE BIT NOT NULL,
-        DESCRIPTION NVARCHAR(255),
+        is_enabled BIT NOT NULL,
+        description NVARCHAR(255),
         image_path NVARCHAR(255) NOT NULL,
-        NAME NVARCHAR(255) NOT NULL,
+        name NVARCHAR(255) NOT NULL,
         price DOUBLE PRECISION NOT NULL,
-        TYPE NVARCHAR(255) NOT NULL,
+        type NVARCHAR(255) NOT NULL,
         PRIMARY KEY (id)
     ) ENGINE=InnoDB;
 
@@ -55,8 +55,29 @@ USE restaurant;
 
     CREATE TABLE work_table (
        id INTEGER NOT NULL AUTO_INCREMENT,
-        table_code NVARCHAR(255),
+        table_code NVARCHAR(255) NOT NULL,
+        is_busy BIT NOT NULL,
         PRIMARY KEY (id)
+    ) ENGINE=InnoDB;
+    
+CREATE TABLE audit_log(
+    id INTEGER NOT NULL AUTO_INCREMENT,
+    user_id INTEGER,
+    action NVARCHAR(255),
+    new_name NVARCHAR(255),
+    old_name NVARCHAR(255),
+    new_product_id INTEGER,
+    old_product_id INTEGER,
+    new_price DOUBLE PRECISION,
+    old_price DOUBLE PRECISION,
+    new_is_enabled BIT,
+    old_is_enabled BIT,
+    new_image_path NVARCHAR(255),
+    old_image_path NVARCHAR(255),
+    new_type NVARCHAR(255),
+    old_type NVARCHAR(255),
+    time_of_action DATETIME NOT NULL,
+    PRIMARY KEY (id)
     ) ENGINE=InnoDB;
 
 -- Creating relationships and constraints

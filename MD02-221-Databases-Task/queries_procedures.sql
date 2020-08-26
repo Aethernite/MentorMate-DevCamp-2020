@@ -1,13 +1,13 @@
 -- Selects all the ENABLED menu products 3.a
 -- COMPLETED 3 a)
 SELECT * FROM `restaurant`.`product`
-WHERE `active` = 1;
+WHERE `is_enabled` = 1;
 
 -- Selects all ENABLED menu products that start with C 3.b
 -- COMPLETED 3 b)
 SELECT *
 FROM `restaurant`.`product`
-WHERE `name` LIKE 'C%' AND `active` = 1;
+WHERE `name` LIKE 'C%' AND `is_enabled` = 1;
 
 -- Selects all the orders and the ordered items for each order sorted by order ID 3.c
 -- COMPLETED 3 c)
