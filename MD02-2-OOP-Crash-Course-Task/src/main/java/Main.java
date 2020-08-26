@@ -18,8 +18,8 @@ import java.util.*;
  * - Gson v2.8.5
  */
 public class Main {
-    private final String input = "crash-course-task-input.json";
-    private final String output = "crash-course-task-output.json";
+    private final String INPUT = "crash-course-task-input.json";
+    private final String OUTPUT = "crash-course-task-output.json";
 
     public static void main(String[] args) throws IOException, ParseException {
         Main main = new Main();
@@ -30,10 +30,10 @@ public class Main {
     }
 
     public void start() throws IOException, ParseException {
-        JSONObject dataJSON = Tools.extractDataJSON(input);
+        JSONObject dataJSON = Tools.extractDataJSON(INPUT);
         JSONArray figuresJSON = (JSONArray) dataJSON.get("figures");
         List<Figure> figures = Tools.deserializeFiguresFromJSON(figuresJSON);
-        Tools.exportJSONData(figures, output);
+        Tools.exportJSONData(figures, OUTPUT);
     }
 
 
