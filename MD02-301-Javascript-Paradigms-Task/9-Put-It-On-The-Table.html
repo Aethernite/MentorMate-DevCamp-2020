@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script>
+function loadTable(){
+let jsonStrings = [
+  '{"type":"Fruit","name":"Apple","calories":95}',
+  '{"type":"Fruit","name":"Avocado","calories":270}',
+  '{"type":"Fruit","name":"Coconut","calories":351}',
+  '{"type":"Fruit","name":"Lemon","calories":6}',
+  '{"type":"Vegetable","name":"Brussels Sprouts","calories":56}',
+  '{"type":"Vegetable","name":"Rice (white)","calories":223}',
+  '{"type":"Vegetable","name":"Zucchini","calories":22}',
+  '{"type":"Vegetable","name":"Cabbage","calories":31}',
+  '{"type":"Meat","name":"Beef (steak)","calories":229}',
+  '{"type":"Poultry","name":"Chicken Breast (100g)","calories":75}'];
+
+  function toHtmlElement(string){
+      let parsed = JSON.parse(string);
+      let html = "<tr>" + "<td>" + parsed.type + "</td>" + "<td>" + parsed.name + "</td>" + "<td>" + parsed.calories + "</td>" + "</tr>";
+      return html;
+  }
+var table = "<table>";
+jsonStrings.forEach(e => table+=toHtmlElement(e));
+table += "</table>";
+console.log(table);
+document.write(table);
+}
+</script>
+</head>
+<body onload="loadTable()">
+<body>
+</html>
