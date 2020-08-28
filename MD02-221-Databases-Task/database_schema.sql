@@ -51,7 +51,7 @@ CREATE TABLE work_table (
 	PRIMARY KEY (id)
 	) ENGINE = InnoDB;
 
-CREATE TABLE audit_log (
+CREATE TABLE product_audit_log (
 	id INT NOT NULL AUTO_INCREMENT,
 	user_id INT,
 	action NVARCHAR(255),

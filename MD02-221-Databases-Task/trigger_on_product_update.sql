@@ -3,7 +3,7 @@ delimiter $$
 CREATE TRIGGER after_product_update AFTER UPDATE ON `restaurant`.`product`
 FOR EACH ROW 
 BEGIN
-INSERT INTO audit_log(
+INSERT INTO product_audit_log(
 user_id,
 action,
 old_name,
