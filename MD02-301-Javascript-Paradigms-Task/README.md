@@ -6,6 +6,7 @@
 ### :white_check_mark: 2. Write a JavaScript function compareChars(value) that compares two arrays of chars lexicographically (letter by letter). Write a JavaScript program charComparer.js that invokes your function with the sample input data below and prints the output at the console. Examples:
 
 **Example:**
+
 | Input                                                                                                    | Output    |
 |----------------------------------------------------------------------------------------------------------|-----------|
 | ['1', 'f', '1', 's', 'g', 'j', 'f', 'u', 's', 'q']<br>['1', 'f', '1', 's', 'g', 'j', 'f', 'u', 's', 'q'] | Equal     |
