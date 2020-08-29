@@ -6,23 +6,24 @@
 ### :white_check_mark: 2. Write a JavaScript function compareChars(value) that compares two arrays of chars lexicographically (letter by letter). Write a JavaScript program charComparer.js that invokes your function with the sample input data below and prints the output at the console. Examples:
 
 **Example:**
-| Input                                                                                                 	| Output    	|
-|-------------------------------------------------------------------------------------------------------	|-----------	|
-| ['1', 'f', '1', 's', 'g', 'j', 'f', 'u', 's', 'q'] <br>['1', 'f', '1', 's', 'g', 'j', 'f', 'u', 's', 'q'] 	| Equal     	|
-|   ['3', '5', 'g', 'd'] <br>   ['5', '3', 'g', 'd'] 	| Not equal 	|
-
+| Input                                                                                                    | Output    |
+|----------------------------------------------------------------------------------------------------------|-----------|
+| ['1', 'f', '1', 's', 'g', 'j', 'f', 'u', 's', 'q']<br>['1', 'f', '1', 's', 'g', 'j', 'f', 'u', 's', 'q'] | Equal     |
+| ['3', '5', 'g', 'd']			    ['5', '3', 'g', 'd']                                                             | Not Equal |
 
 ### :white_check_mark: 3. Sort Array. Sorting an array means to arrange its elements in increasing order.  Write a JavaScript function sortArray(value) to sort an array. Use the "selection sort" algorithm: find the smallest element, move it at the first position, find the smallest from the rest, move it at the second position, etc. Write JS program arraySorter.js that invokes your function with the sample input data below and prints the output at the console.
 
 **Example:**  
-| Input                                       | Output                                       |
-|---------------------------------------------|----------------------------------------------|
-| [12, 12, 50, 2, 6, 22, 51, 712, 6, 3, 3]    | 2, 3, 3, 6, 6, 12, 12, 22, 50, 51, 712       |
-| [5, 4, 3, 2, 1]                             | 1, 2, 3, 4, 5                                |
-| [3, 74, -1, -22, 1, 0, 17]                  | -22, -1, 0, 1, 3, 17, 74                     |
+
+| Input                                    | Output                                 |
+|------------------------------------------|----------------------------------------|
+| [12, 12, 50, 2, 6, 22, 51, 712, 6, 3, 3] | 2, 3, 3, 6, 6, 12, 12, 22, 50, 51, 712 |
+| [5, 4, 3, 2, 1]                          | 1, 2, 3, 4, 5                          |
+| [3, 74, -1, -22, 1, 0, 17]               | -22, -1, 0, 1, 3, 17, 74               |
   
  ### :white_check_mark: 4. Write a JavaScript function countSubstringOccur(value) that accepts as parameter an array of 2 elements arr [keyword, text]. The function finds how many times a substring is contained in a given text (perform case insensitive search). Write JS program substringSearch.js that invokes your function with the sample input data below and prints the output at the console. 
  **Example:** 
+
 | Input                                                                                                                                                                             | Output |
 |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
 | ['in', 'We are living in a yellow submarine. We don't have anything else. Inside the submarine is very tight. So we are drinking all the day. We will move out of it in 5 days.'] | 9      |
@@ -35,20 +36,22 @@
 ### :white_check_mark: 5. Write a JavaScript function findPalindromes(value) that extracts from a given text all palindromes, e.g. "ABBA", "lamal", "exe". Write JS program palindromesExtract.js that invokes your function with the sample input data below and prints the output at the console.  
   
 **Example:**
-| Input                                                                                                                                                                             | Output |
-|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
-| ['in', 'We are living in a yellow submarine. We don't have anything else. Inside the submarine is very tight. So we are drinking all the day. We will move out of it in 5 days.'] | 9      |
-| ['your', 'No one heard a single word you said. They should have seen it in your eyes. What was going around your head.']                                                          | 2      |
+
+| Input                               | Output |
+|-------------------------------------|--------|
+| 'There is a man, his name was Bob.'	 | a, bob |
 
  
 ### :white_check_mark: 6. Write a JavaScript function findMostFreqWord(value) that finds the most frequent word in a text and prints it, as well as how many times it appears in format "word -> count". Consider any non-letter character as a word separator. Ignore the character casing. If several words have the same maximal frequency, print all of them in alphabetical order. Write a JavaScript program frequentWord.js that invokes your function with the sample input data below and prints the output at the console.  
   
-Example:
+**Example:**
+
 | Input                                                                                                                                                                                                                                                                                                         | Output                                                                                               |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
 | 'in the middle of the night'                                                                                                                                                                                                                                                                                  | the -> 2 times                                                                                       |
 | 'Hello my friend, hello my darling. Come on, come here. Welcome, welcome darling.'                                                                                                                                                                                                                            | come -> 2 times <br>darling -> 2 times <br>hello -> 2 times <br>my -> 2 times <br>welcome -> 2 times |
 | 'Huh, because I'm happy<br>Clap along if you feel like a room without a roof<br>Because I'm happy<br>Clap along if you feel like happiness is the truth<br>Because I'm happy<br>Clap along if you know what happiness is to you<br>Because I'm happy<br>Clap along if you feel like that's what you wanna do' | you -> 6 times                                                                                       |
+
 
 ### :white_check_mark: 7. Write a JavaScript program to test if the first character of a string is uppercase or not. Use regular expressions.
 
