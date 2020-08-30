@@ -14,7 +14,7 @@ body {
 }
 
 /* Style the header */
-header {
+.header {
   background: #0d0d0d;
   padding: 10px;
   text-align: center;
@@ -23,15 +23,15 @@ header {
 }
 
 
-article img{
-  transform: scale(1);
-  height: 100%;
-  display:inline-block;
+.article img{
+  max-width:1000px;
+  padding: 10px;
+  display:block;
 }
 
 
 /* Styling the nav-bar to float left */
-aside {
+.nav-menu {
   max-width: 200px;
   background: #191a1c;
   padding: 20px;
@@ -42,16 +42,16 @@ aside {
 }
 
 /* Style the list inside the menu */
-aside ul {
+.nav-menu ul {
   list-style-type: none;
 }
 
-aside ul li{
+.nav-menu ul li{
   padding-top:20px;
 }
 
 /* Styling the "Buttons" */
-aside a{
+.nav-menu a{
     margin-top: 10%;
     margin-left: 10%;
     text-decoration: none;
@@ -61,26 +61,26 @@ aside a{
     display: block;
 }
 
-aside a:hover {
+.nav-menu a:hover {
     color: #f1f1f1;
 }
 
 
 /*Section overflows due to the images*/
-section{
+.content{
   overflow: visible;
   overflow-x: hidden;
   overflow-y: hidden;
   height: 100%;
 }
 
-article {
+.article {
   padding: 20px;
   background-color: white;
 }
 
 /* Style the footer */
-footer {
+.footer {
   background-color: #0d0d0d;
   position: absolute;
   padding: 10px;
@@ -90,7 +90,7 @@ footer {
   width: 100%;
 }
 
-footer p{
+.footer p{
   display: inline-block;
   text-align: centered;
   padding-left: 5%;
