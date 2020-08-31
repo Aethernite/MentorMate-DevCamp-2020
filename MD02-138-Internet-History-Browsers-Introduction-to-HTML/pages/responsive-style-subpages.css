@@ -1,0 +1,40 @@
+/* For resolution 1920px */
+@media(max-width:1920px){
+  .article img{
+    width: 100%;
+  }
+}
+
+/* For resolution 1280px */
+@media ( max-width: 1280px ){
+  .article img{
+    width: 100%;
+  }
+}
+
+/* For resolution 750px */
+@media ( max-width: 750px ){
+  .article img{
+   width: 90%;
+  }
+}
+
+/* For resolution 600px  - Nav-Bar hidden*/
+@media (max-width: 600px) {
+  .header {
+		width:100%;
+   }
+	
+  .nav-menu{
+    visibility: hidden;
+	display: none;
+  }
+  
+  .article{
+    width:100%;
+  }
+  
+  .image-box img{
+    width: 100%;
+	display: block;
+  }
