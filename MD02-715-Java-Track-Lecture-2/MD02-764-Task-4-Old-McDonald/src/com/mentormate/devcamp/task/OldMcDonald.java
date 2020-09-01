@@ -24,24 +24,25 @@ public class OldMcDonald {
      */
     public void sing() {
         for (Animal animal : animals) {
-            System.out.println("Old McDonald had a farm, E-I-E-I-O\n"
-                    + "And on his farm he had a "
-                    + animal.getType()
-                    + ", E-I-E-I-O\n"
-                    + "With a "
-                    + animal.getSound()
-                    + " "
-                    + animal.getSound()
-                    + " here and a "
-                    + animal.getSound()
-                    + " "
-                    + animal.getSound()
-                    + " there\n"
-                    + animal.getSound() + " here "
-                    + animal.getSound() + " there, everywhere "
-                    + animal.getSound() + " "
-                    + animal.getSound()
-                    + "\n" + "Old McDonald had a farm, E-I-E-I-O");
+            StringBuilder sb = new StringBuilder();
+            sb.append("Old McDonald had a farm, E-I-E-I-O\n")
+                    .append("And on his farm he had a ")
+                    .append(animal.getType())
+                    .append(", E-I-E-I-O\n")
+                    .append("With a ")
+                    .append(animal.getSound())
+                    .append(" ")
+                    .append(animal.getSound())
+                    .append(" here and a ")
+                    .append(animal.getSound())
+                    .append(" ")
+                    .append(animal.getSound())
+                    .append(" there\n")
+                    .append(animal.getSound()).append(" here ")
+                    .append(animal.getSound()).append(" there, everywhere ")
+                    .append(animal.getSound()).append(" ")
+                    .append(animal.getSound());
+            System.out.println(sb.toString());
         }
     }
 
