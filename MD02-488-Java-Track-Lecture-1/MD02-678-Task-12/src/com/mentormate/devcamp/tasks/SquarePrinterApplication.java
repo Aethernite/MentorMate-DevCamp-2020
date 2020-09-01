@@ -40,10 +40,20 @@ public class SquarePrinterApplication {
 
     private void getUserInput() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Square side: ");
-        side = scanner.nextInt();
-        System.out.println("Number of squares: ");
-        numberOfSquares = scanner.nextInt();
+        do {
+            System.out.print("Square side: ");
+            side = scanner.nextInt();
+            if(side < 2){
+                System.out.println("Side must be > 2!");
+            }
+        } while(side < 2);
+        do {
+            System.out.print("Number of squares: ");
+            numberOfSquares = scanner.nextInt();
+            if(numberOfSquares<=0){
+                System.out.println("Number of squares must be > 0!");
+            }
+        }while(numberOfSquares <= 0);
         scanner.close();
     }
 }
