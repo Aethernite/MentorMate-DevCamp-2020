@@ -14,13 +14,13 @@ public abstract class Hero {
     private Random random;
 
     /**
-     * Instantiates a new Hero.
+     * Instantiates a new Hero subclass.
      */
     public Hero() {
     }
 
     /**
-     * Instantiates a new Hero.
+     * Instantiates a new Hero subclass.
      *
      * @param health the health
      * @param attack the attack

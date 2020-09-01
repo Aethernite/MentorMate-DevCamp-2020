@@ -17,7 +17,7 @@ public class Assassin extends Hero {
      * @param attack the attack
      * @param armor  the armor
      */
-    public Assassin(long health, long attack, long armor) {
+    public Assassin(int health, int attack, int armor) {
         super(health, attack, armor);
         random = new Random();
     }
