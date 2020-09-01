@@ -24,27 +24,17 @@ public class OldMcDonald {
      */
     public void sing() {
         for (Animal animal : animals) {
+            String type = animal.getType();
+            String sound = animal.getSound();
             StringBuilder sb = new StringBuilder();
-            sb.append("Old McDonald had a farm, E-I-E-I-O\n")
-                    .append("And on his farm he had a ")
-                    .append(animal.getType())
-                    .append(", E-I-E-I-O\n")
-                    .append("With a ")
-                    .append(animal.getSound())
-                    .append(" ")
-                    .append(animal.getSound())
-                    .append(" here and a ")
-                    .append(animal.getSound())
-                    .append(" ")
-                    .append(animal.getSound())
-                    .append(" there\n")
-                    .append(animal.getSound()).append(" here ")
-                    .append(animal.getSound()).append(" there, everywhere ")
-                    .append(animal.getSound()).append(" ")
-                    .append(animal.getSound());
+            sb.append(String.format("Old McDonald had a farm, E-I-E-I-O %n"))
+                    .append(String.format("And on his farm he had a %1$s E-I-E-I-O %n",type))
+                    .append(String.format("With a %1$s %1$s here and a %1$s %1$s there %n",sound))
+                    .append(String.format("%1$s here %1$s there, everywhere",sound));
             System.out.println(sb.toString());
         }
     }
+    
 
     /**
      * The entry point of application.
