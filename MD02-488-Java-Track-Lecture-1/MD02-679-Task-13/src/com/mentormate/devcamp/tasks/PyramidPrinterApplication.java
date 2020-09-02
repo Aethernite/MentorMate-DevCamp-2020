@@ -21,7 +21,6 @@ public class PyramidPrinterApplication {
         printPyramid(iterations, symbol);
     }
 
-
     private void getUserInput() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("N=");
