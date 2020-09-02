@@ -27,7 +27,7 @@ public class SquarePrinterApplication {
         for (int i = 0; i < side; i++) {
             int end = (side * numberOfSquares - numberOfSquares);
             for (int j = 0; j <= end; j++) {
-                if (i==0 || i==side - 1 || j==0 || j==end || j % (side - 1)==0) {
+                if (i == 0 || i == side - 1 || j == 0 || j == end || j % (side - 1) == 0) {
                     System.out.print("* ");
                 } else {
                     System.out.print("  ");
@@ -42,10 +42,10 @@ public class SquarePrinterApplication {
         do {
             System.out.print("Square side: ");
             side = scanner.nextInt();
-            if (side < 2) {
+            if (side <= 2) {
                 System.out.println("Side must be > 2!");
             }
-        } while (side < 2);
+        } while (side <= 2);
         do {
             System.out.print("Number of squares: ");
             numberOfSquares = scanner.nextInt();
