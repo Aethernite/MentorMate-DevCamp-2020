@@ -24,11 +24,11 @@ public class SquarePrinterApplication {
         printSquares();
     }
 
-    private void printSquares() {
+     private void printSquares() {
         for (int i = 0; i < side; i++) {
-            int end = (side * numberOfSquares) - (side - numberOfSquares) - 1;
+            int end = (side*numberOfSquares-numberOfSquares);
             for (int j = 0; j <= end; j++) {
-                if (i==0 || i==side - 1 || j==0 || j==end || j % (side - 1)==0) {
+                if (i==0 || i==side-1 || j==0 || j==end || j%(side-1)==0) {
                     System.out.print("* ");
                 } else {
                     System.out.print("  ");
