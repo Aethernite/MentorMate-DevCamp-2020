@@ -32,7 +32,7 @@ public enum Operation {
      * @return the operation
      */
     public static Operation operationFromCode(Integer code) {
-        if (BY_OPERATION.get(code)==null) {
+        if (BY_OPERATION.get(code) == null) {
             throw new UnsupportedOperationException(String.format("Operation with code %d does not exist!", code));
         }
         return BY_OPERATION.get(code);
