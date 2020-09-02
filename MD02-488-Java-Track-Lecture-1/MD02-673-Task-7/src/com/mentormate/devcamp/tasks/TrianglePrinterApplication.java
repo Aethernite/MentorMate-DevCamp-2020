@@ -26,7 +26,7 @@ public class TrianglePrinterApplication {
     private void getUserInput() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("N=");
-        int iterations = scanner.nextInt();
+        iterations = scanner.nextInt();
         scanner.close();
     }
 
