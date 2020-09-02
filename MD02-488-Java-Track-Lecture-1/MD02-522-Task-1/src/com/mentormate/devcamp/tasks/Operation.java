@@ -10,7 +10,8 @@ import java.util.Map;
  */
 public enum Operation {
     ADDITION(1),
-    SUBTRACTION(2);
+    SUBTRACTION(2),
+    DIVISION(3);
     private final int code;
     private static final Map<Integer, Operation> BY_OPERATION = new HashMap<>();
 
@@ -31,6 +32,9 @@ public enum Operation {
      * @return the operation
      */
     public static Operation operationFromCode(Integer code) {
+        if (BY_OPERATION.get(code)==null) {
+            throw new UnsupportedOperationException(String.format("Operation with code %d does not exist!", code));
+        }
         return BY_OPERATION.get(code);
     }
 }

@@ -10,14 +10,24 @@ public class ArithmeticApplication {
     private int numOne;
     private int numTwo;
 
-
     /**
      * The start method for the application.
      */
     public void start() {
         getUserInput();
-        Operation operation = Operation.operationFromCode(code);
-        System.out.print(String.format("Result: %d", getResult(operation)));
+        Operation operation = null;
+        try {
+            operation = Operation.operationFromCode(code);
+        } catch (UnsupportedOperationException e) {
+            System.out.println(e.getMessage());
+        }
+        if (operation!=null) {
+            try {
+                System.out.print(String.format("Result: %d", getResult(operation)));
+            } catch (UnsupportedOperationException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     private int getResult(Operation operation) {
@@ -27,7 +37,7 @@ public class ArithmeticApplication {
             case SUBTRACTION:
                 return numOne - numTwo;
             default:
-                throw new IllegalStateException("Unexpected operation: " + operation);
+                throw new UnsupportedOperationException("Unsupported operation: " + operation);
         }
     }
 
