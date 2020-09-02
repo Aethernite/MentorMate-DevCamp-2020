@@ -1,6 +1,7 @@
 package com.mentormate.devcamp.tasks;
 
 import java.util.Scanner;
+
 /**
  * The main.
  * <p>
