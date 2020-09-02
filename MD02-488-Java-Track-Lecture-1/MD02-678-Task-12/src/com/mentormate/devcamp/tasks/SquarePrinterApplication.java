@@ -42,7 +42,7 @@ public class SquarePrinterApplication {
         do {
             System.out.print("Square side: ");
             side = scanner.nextInt();
-            if (side < 2) {
+            if (side <= 2) {
                 System.out.println("Side must be > 2!");
             }
         } while (side < 2);
