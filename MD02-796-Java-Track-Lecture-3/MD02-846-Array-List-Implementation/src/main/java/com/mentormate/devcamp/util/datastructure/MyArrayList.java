@@ -5,7 +5,6 @@ import com.mentormate.devcamp.util.interfaces.Iterable;
 import com.mentormate.devcamp.util.interfaces.Iterator;
 import com.mentormate.devcamp.util.interfaces.List;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
