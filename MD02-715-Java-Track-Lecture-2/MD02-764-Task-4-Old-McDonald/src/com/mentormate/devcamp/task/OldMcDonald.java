@@ -35,7 +35,6 @@ public class OldMcDonald {
         }
     }
     
-
     /**
      * The entry point of application.
      *

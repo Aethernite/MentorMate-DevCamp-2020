@@ -1,6 +1,5 @@
 package com.mentormate.devcamp.task.animal;
 
-
 /**
  * The type Cow.
  */
