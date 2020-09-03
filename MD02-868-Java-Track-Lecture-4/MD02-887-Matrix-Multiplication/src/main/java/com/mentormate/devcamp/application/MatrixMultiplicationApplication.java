@@ -73,7 +73,7 @@ public class MatrixMultiplicationApplication {
     public int[][] start(int[][] matrix1, int[][] matrix2) throws NonMultiplicativeMatrixException, InterruptedException {
         this.matrix1 = matrix1;
         this.matrix2 = matrix2;
-        if (matrix1[0].length!=matrix2.length) {
+        if (matrix1[0].length != matrix2.length) {
             throw new NonMultiplicativeMatrixException();
         }
         result = new int[matrix1.length][matrix2[0].length];
