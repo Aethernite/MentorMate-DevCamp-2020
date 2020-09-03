@@ -1,6 +1,5 @@
 package com.mentormate.devcamp.game.hero;
 
-
 import java.util.Random;
 
 /**

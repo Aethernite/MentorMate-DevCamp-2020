@@ -22,7 +22,6 @@ public class Assassin extends Hero {
         random = new Random();
     }
 
-
     @Override
     public void attack(Hero hero) {
         long points = Math.round(attack * (random.nextDouble() * (1.2 - 0.8) + 0.8));

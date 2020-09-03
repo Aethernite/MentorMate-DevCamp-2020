@@ -6,7 +6,6 @@ import com.mentormate.devcamp.game.hero.Assassin;
 import com.mentormate.devcamp.game.hero.Hero;
 import com.mentormate.devcamp.game.hero.Knight;
 
-
 /**
  * The Fight game application.
  */
