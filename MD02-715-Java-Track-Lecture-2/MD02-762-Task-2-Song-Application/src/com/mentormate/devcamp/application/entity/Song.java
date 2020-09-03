@@ -29,7 +29,6 @@ public class Song {
         System.out.println(String.format("Duration: %d:%d",duration.getSeconds()/60, duration.getSeconds()%60));
     }
 
-
     public static String getClassCharacteristics(){
         StringBuilder sb = new StringBuilder();
         Class thisClass = Song.class;
