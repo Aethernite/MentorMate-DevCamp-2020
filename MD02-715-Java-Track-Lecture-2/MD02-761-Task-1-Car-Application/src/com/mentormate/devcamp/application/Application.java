@@ -33,11 +33,8 @@ public class Application {
         Car cityCar = carBuilder.getResult();
         printCar(cityCar);
         testCarMethods(sportCar);
-
     }
 
-    
-    
     private void testCarMethods(Car car) {
         StringBuilder sb = new StringBuilder();
         sb.append("Can the car endure 3 passengers and 2 bags: ").append(car.canEndure(3, 2)).append(System.lineSeparator());
@@ -51,11 +48,9 @@ public class Application {
         car.shiftDown();
         sb.append("Car shift after shift down: ").append(car.getCurrentShift()).append(System.lineSeparator());
         sb.append("Is the car on shift 3: ").append(car.compareShift(3)).append(System.lineSeparator());
-
         System.out.println(sb.toString());
     }
 
-    
     private void printCar(Car car) {
         System.out.println(car.toString());
     }

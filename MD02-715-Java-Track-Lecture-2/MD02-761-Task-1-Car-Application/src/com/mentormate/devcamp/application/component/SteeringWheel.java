@@ -5,11 +5,11 @@ package com.mentormate.devcamp.application.component;
  */
 public enum SteeringWheel {
     /**
-     * Left steering wheel steering wheel.
+     * Left steering wheel.
      */
     LEFT_STEERING_WHEEL,
     /**
-     * Right steering wheel steering wheel.
+     * Right steering wheel.
      */
     RIGHT_STEERING_WHEEL
 }

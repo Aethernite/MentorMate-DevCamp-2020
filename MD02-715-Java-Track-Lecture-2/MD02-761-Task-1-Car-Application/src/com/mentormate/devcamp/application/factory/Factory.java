@@ -6,6 +6,7 @@ import com.mentormate.devcamp.application.builder.Builder;
  * The interface Factory.
  */
 public interface Factory {
+	
     /**
      * Construct city car.
      *

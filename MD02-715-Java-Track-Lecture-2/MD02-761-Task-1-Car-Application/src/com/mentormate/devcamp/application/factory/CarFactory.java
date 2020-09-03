@@ -12,7 +12,6 @@ import java.time.Year;
  */
 public class CarFactory implements Factory {
 
-    
     public void constructSportsCar(Builder builder) {
         builder.setColor(Color.RED);
         builder.setDoors(2);

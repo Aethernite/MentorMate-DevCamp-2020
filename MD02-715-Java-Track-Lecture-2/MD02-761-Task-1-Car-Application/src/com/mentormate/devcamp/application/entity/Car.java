@@ -62,7 +62,7 @@ public class Car {
      * @return the boolean if shifts are equal
      */
     public boolean compareShift(int shift) {
-        return this.currentShift==shift;
+        return this.currentShift == shift;
     }
 
     /**
