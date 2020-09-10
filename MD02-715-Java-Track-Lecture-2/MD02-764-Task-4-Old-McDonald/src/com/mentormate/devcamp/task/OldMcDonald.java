@@ -28,13 +28,13 @@ public class OldMcDonald {
             String sound = animal.getSound();
             StringBuilder sb = new StringBuilder();
             sb.append(String.format("Old McDonald had a farm, E-I-E-I-O %n"))
-                    .append(String.format("And on his farm he had a %1$s E-I-E-I-O %n",type))
-                    .append(String.format("With a %1$s %1$s here and a %1$s %1$s there %n",sound))
-                    .append(String.format("%1$s here %1$s there, everywhere",sound));
+                    .append(String.format("And on his farm he had a %1$s E-I-E-I-O %n", type))
+                    .append(String.format("With a %1$s %1$s here and a %1$s %1$s there %n", sound))
+                    .append(String.format("%1$s here %1$s there, %1$s everywhere", sound));
             System.out.println(sb.toString());
         }
     }
-    
+
     /**
      * The entry point of application.
      *
