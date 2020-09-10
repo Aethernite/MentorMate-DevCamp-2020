@@ -7,10 +7,18 @@ import java.util.Scanner;
 
 import static com.mentormate.devcamp.application.styling.AnsiColorCodes.*;
 
+/**
+ * The Login page.
+ */
 public class LoginPage implements Command {
     private Command parent;
     private static Scanner sc = new Scanner(System.in);
 
+    /**
+     * Instantiates a new Login page.
+     *
+     * @param parent the parent command
+     */
     public LoginPage(Command parent) {
         this.parent = parent;
     }
@@ -35,4 +43,5 @@ public class LoginPage implements Command {
         String password = sc.nextLine();
         return new Account(username, password);
     }
+    
 }

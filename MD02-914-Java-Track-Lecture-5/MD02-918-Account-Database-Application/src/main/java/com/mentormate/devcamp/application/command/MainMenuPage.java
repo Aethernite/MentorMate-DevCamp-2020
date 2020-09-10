@@ -7,11 +7,20 @@ import java.util.Scanner;
 
 import static com.mentormate.devcamp.application.styling.AnsiColorCodes.*;
 
+/**
+ * The Main menu page.
+ */
 public class MainMenuPage implements Command {
     private Command parent;
     private Account account;
     private Scanner sc = new Scanner(System.in);
 
+    /**
+     * Instantiates a new Main menu page.
+     *
+     * @param parent  the parent command
+     * @param account the logged in account
+     */
     public MainMenuPage(Command parent, Account account) {
         this.parent = parent;
         this.account = account;
@@ -33,7 +42,8 @@ public class MainMenuPage implements Command {
                 deleteAccountById();
                 break;
             case '3':
-                //TODO
+                editAccountById();
+                break;
             case '4':
                 return new Exit(this);
             default:
@@ -58,5 +68,64 @@ public class MainMenuPage implements Command {
         int id = Integer.parseInt(sc.nextLine());
         Database.delete(id);
 
+    }
+
+    private void editAccountById() {
+        System.out.println("Enter the id:");
+        int id = Integer.parseInt(sc.nextLine());
+        if (!Database.existsById(id)) {
+            System.out.println("User with id " + id + " doesn't exist in the database!");
+            return;
+        }
+        Account accountToEdit = Database.getAccountById(id);
+        System.out.println(accountToEdit);
+        edit(accountToEdit);
+    }
+
+    private void edit(Account account) {
+        System.out.println(account);
+        while (true) {
+            System.out.println("1) Email");
+            System.out.println("2) First name");
+            System.out.println("3) Last name");
+            System.out.println("4) Password");
+            System.out.println("5) Date of birth");
+            System.out.println("6) Submit edit");
+            System.out.println("Choose what to edit:");
+            int choice = Integer.parseInt(sc.nextLine());
+            switch (choice) {
+                case 1:
+                    System.out.println("Enter new email:");
+                    String email = sc.nextLine();
+                    account.setEmail(email);
+                    break;
+                case 2:
+                    System.out.println("Enter new first name:");
+                    String firstName = sc.nextLine();
+                    account.setFirstName(firstName);
+                    break;
+                case 3:
+                    System.out.println("Enter new last name:");
+                    String lastName = sc.nextLine();
+                    account.setLastName(lastName);
+                    break;
+                case 4:
+                    System.out.println("Enter new password:");
+                    String password = sc.nextLine();
+                    account.setPassword(password);
+                    break;
+                case 5:
+                    System.out.println("Enter new date of birth:");
+                    String dateOfBirth = sc.nextLine();
+                    account.setPassword(dateOfBirth);
+                    break;
+                case 6:
+                    Database.update(account);
+                    return;
+                default:
+                    System.out.println("Invalid choice!");
+                    break;
+            }
+        }
     }
 }

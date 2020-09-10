@@ -4,10 +4,18 @@ import java.util.Scanner;
 
 import static com.mentormate.devcamp.application.styling.AnsiColorCodes.*;
 
+/**
+ * The Landing page.
+ */
 public class LandingPage implements Command {
     private Command parent;
     private Scanner sc = new Scanner(System.in);
 
+    /**
+     * Instantiates a new Landing page.
+     *
+     * @param parent the parent command
+     */
     public LandingPage(Command parent) {
         this.parent = parent;
     }

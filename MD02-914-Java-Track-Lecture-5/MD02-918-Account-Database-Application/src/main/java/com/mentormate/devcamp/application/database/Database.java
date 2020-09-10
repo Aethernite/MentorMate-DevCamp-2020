@@ -4,15 +4,25 @@ import com.mentormate.devcamp.application.entity.Account;
 
 import java.sql.*;
 
+
+/**
+ * The class Database.
+ * <p>
+ * Operates all of the SQL queries and updates.
+ */
 public class Database {
-    private static final String JDBC_DRIVER = "org.h2.Driver";
     private static final String DB_URL = "jdbc:h2:mem:database";
     private static final String USER = "admin";
     private static final String PASS = "password";
     private static Connection db = null;
 
-    public static void initialize() throws ClassNotFoundException {
-        Class.forName(JDBC_DRIVER);
+    private Database() {
+    }
+
+    /**
+     * Initialize the database.
+     */
+    public static void initialize() {
         try {
             System.out.println("Connecting to database...");
             db = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -25,54 +35,63 @@ public class Database {
     }
 
     private static void createTables() {
-        Statement stmt = null;
+        Statement stmt;
         try {
             stmt = db.createStatement();
-            String sql = "CREATE TABLE ACCOUNT " +
-                    "(id INTEGER not NULL AUTO_INCREMENT, " +
-                    " email NVARCHAR(255), " +
-                    " password NVARCHAR(255), " +
-                    " firstName NVARCHAR(255), " +
-                    " lastName NVARCHAR(255), " +
-                    " dateOfBirth NVARCHAR, " +
-                    " PRIMARY KEY ( id ))";
-            stmt.executeUpdate(sql);
+            stmt.executeUpdate(Queries.CREATE_TABLE_ACCOUNT);
             stmt.close();
         } catch (SQLException e) {
             System.out.println("Error in creating table ACCOUNT");
         }
     }
 
+    /**
+     * Insert account into the database.
+     *
+     * @param account the account
+     */
     public static void insertAccount(Account account) {
-        Statement stmt = null;
+        Statement stmt;
         try {
             stmt = db.createStatement();
-            String sql = String.format("INSERT INTO ACCOUNT (email,password,firstName,lastName,dateOfBirth) VALUES ('%s', '%s', '%s', '%s', '%s')", account.getEmail(), account.getPassword(), account.getFirstName(), account.getLastName(), account.getDateOfBirth());
+            String sql = String.format(Queries.INSERT_ACCOUNT, account.getEmail(), account.getPassword(), account.getFirstName(), account.getLastName(), account.getDateOfBirth());
             stmt.executeUpdate(sql);
             stmt.close();
         } catch (SQLException e) {
-            System.out.println("Error in inserting account in the database");
+            System.out.println("Error in inserting account in the database(method insertAccount)");
         }
     }
 
+    /**
+     * Check login.
+     *
+     * @param account the account
+     * @return true if the account is in the database and false if it is not
+     */
     public static boolean checkLogin(Account account) {
-        Statement stmt = null;
+        Statement stmt;
         try {
             stmt = db.createStatement();
-            String sql = String.format("SELECT email, password FROM ACCOUNT WHERE email = '%s' AND password = '%s'", account.getEmail(), account.getPassword());
+            String sql = String.format(Queries.CHECK_ACCOUNT, account.getEmail(), account.getPassword());
             ResultSet rs = stmt.executeQuery(sql);
             return rs.next();
         } catch (SQLException e) {
-            System.out.println("Error in executing query in the database in check login");
+            System.out.println("Error in executing query in the database in check login(method checkLogin)");
         }
         return false;
     }
 
+    /**
+     * Gets account.
+     *
+     * @param account the account
+     * @return the account
+     */
     public static Account getAccount(Account account) {
-        Statement stmt = null;
+        Statement stmt;
         try {
             stmt = db.createStatement();
-            String sql = String.format("SELECT * FROM Account WHERE email='%s' AND password='%s'", account.getEmail(), account.getPassword());
+            String sql = String.format(Queries.GET_ACCOUNT, account.getEmail(), account.getPassword());
             ResultSet rs = stmt.executeQuery(sql);
             rs.next();
             int id = rs.getInt("id");
@@ -83,31 +102,38 @@ public class Database {
             String password = rs.getString("password");
             return new Account(id, email, firstName, lastName, dateOfBirth, password);
         } catch (SQLException e) {
-            System.out.println("Error in executing query in the database");
+            System.out.println("Error in executing query in the database(method getAccount())");
         }
         return null;
     }
 
+    /**
+     * Checks if the given account exists in the database.
+     *
+     * @param account the account
+     * @return true if it exists and false if it doesn't
+     */
     public static boolean exists(Account account) {
-        Statement stmt = null;
+        Statement stmt;
         try {
             stmt = db.createStatement();
-            String sql = String.format("SELECT email FROM ACCOUNT WHERE email = '%s';", account.getEmail());
+            String sql = String.format(Queries.EXISTS_ACCOUNT, account.getEmail());
             ResultSet rs = stmt.executeQuery(sql);
-            stmt.close();
             return rs.next();
         } catch (SQLException e) {
-            System.out.println("Error in executing query in the database");
+            System.out.println("Error in executing query in the database (method exists())");
         }
         return false;
     }
 
+    /**
+     * Prints all accounts.
+     */
     public static void printAllAccounts() {
-        Statement stmt = null;
+        Statement stmt;
         try {
             stmt = db.createStatement();
-            String sql = "SELECT * FROM Account";
-            ResultSet rs = stmt.executeQuery(sql);
+            ResultSet rs = stmt.executeQuery(Queries.SELECT_EVERYTHING_FROM_ACCOUNT);
             while (rs.next()) {
                 System.out.println("Id: " + rs.getInt("id"));
                 System.out.println("Email: " + rs.getString("email"));
@@ -117,21 +143,87 @@ public class Database {
                 System.out.println("Password: " + rs.getString("password"));
             }
         } catch (SQLException e) {
-            System.out.println("Error in executing query in the database");
+            System.out.println("Error in executing query in the database(method printAllAccounts()");
         }
     }
 
+    /**
+     * Delete an account by id.
+     *
+     * @param id the id
+     */
     public static void delete(int id) {
-        Statement stmt = null;
+        Statement stmt;
         try {
             stmt = db.createStatement();
-            String sql = String.format("DELETE FROM account WHERE id='%d'", id);
+            String sql = String.format(Queries.DELETE_BY_ID, id);
             stmt.executeUpdate(sql);
             stmt.close();
             System.out.println("Deletion successful");
 
         } catch (SQLException e) {
-            System.out.println("Error in executing deletion in the database");
+            System.out.println("Error in executing deletion in the database(method delete)");
+        }
+    }
+
+    /**
+     * Gets account by id.
+     *
+     * @param id the id
+     * @return the account by id
+     */
+    public static Account getAccountById(int id) {
+        Statement stmt;
+        try {
+            stmt = db.createStatement();
+            String sql = String.format(Queries.GET_BY_ID, id);
+            ResultSet rs = stmt.executeQuery(sql);
+            rs.next();
+            int identification = rs.getInt("id");
+            String email = rs.getString("email");
+            String firstName = rs.getString("firstName");
+            String lastName = rs.getString("lastName");
+            String dateOfBirth = rs.getString("dateOfBirth");
+            String password = rs.getString("password");
+            return new Account(identification, email, firstName, lastName, dateOfBirth, password);
+        } catch (SQLException e) {
+            System.out.println("Error in executing query in the database(method getAccountById())");
+        }
+        return null;
+    }
+
+    /**
+     * Checks if account exists by id.
+     *
+     * @param id the id
+     * @return true if it exists and false if it doesn't
+     */
+    public static boolean existsById(int id) {
+        Statement stmt;
+        try {
+            stmt = db.createStatement();
+            String sql = String.format(Queries.GET_EMAIL_BY_ID, id);
+            ResultSet rs = stmt.executeQuery(sql);
+            return rs.next();
+        } catch (SQLException e) {
+            System.out.println("Error in executing query in the database(method existsById())");
+        }
+        return false;
+    }
+
+    /**
+     * Updates an account.
+     *
+     * @param account the account
+     */
+    public static void update(Account account) {
+        Statement stmt;
+        try {
+            stmt = db.createStatement();
+            String sql = String.format(Queries.UPDATE_ACCOUNT, account.getFirstName(), account.getLastName(), account.getPassword(), account.getDateOfBirth(), account.getEmail(), account.getId());
+            stmt.executeUpdate(sql);
+        } catch (SQLException e) {
+            System.out.println("Error in executing query in the database(method edit())");
         }
     }
 

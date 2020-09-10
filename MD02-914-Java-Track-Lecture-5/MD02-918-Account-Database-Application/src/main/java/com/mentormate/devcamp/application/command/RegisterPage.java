@@ -7,10 +7,18 @@ import java.util.Scanner;
 
 import static com.mentormate.devcamp.application.styling.AnsiColorCodes.*;
 
+/**
+ * The Register page.
+ */
 public class RegisterPage implements Command {
     private Command parent;
     private static Scanner sc = new Scanner(System.in);
 
+    /**
+     * Instantiates a new Register page.
+     *
+     * @param parent the parent command
+     */
     public RegisterPage(Command parent) {
         this.parent = parent;
     }
@@ -44,6 +52,6 @@ public class RegisterPage implements Command {
         String lastName = sc.nextLine();
         System.out.print("Enter date of birth:");
         String dateOfBirth = sc.nextLine();
-        return new Account(firstName, lastName, email.toLowerCase(), dateOfBirth, password);
+        return new Account(email.toLowerCase(), firstName, lastName, dateOfBirth, password);
     }
 }
