@@ -125,7 +125,7 @@ public abstract class Hero {
      * @return the double
      */
     protected double randomizeValueByPercentage(long value) {
-        return (double) value * (random.nextDouble() * (MAX_PERCENTAGE - MIN_PERCENTAGE) + MIN_PERCENTAGE);
+        return value * (random.nextDouble() * (MAX_PERCENTAGE - MIN_PERCENTAGE) + MIN_PERCENTAGE);
     }
 
     /**
