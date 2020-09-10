@@ -49,7 +49,7 @@ public class Car {
      * Compare color boolean.
      *
      * @param color the color
-     * @return the boolean if colors are equal
+     * @return true if colors are equal
      */
     public boolean compareColor(Color color) {
         return this.color==color;
@@ -59,10 +59,10 @@ public class Car {
      * Compare shift boolean.
      *
      * @param shift the shift
-     * @return the boolean if shifts are equal
+     * @return true if the shifts are equal and false if they are not
      */
-    public boolean compareShift(int shift) {
-        return this.currentShift == shift;
+    public boolean compareGear(int shift) {
+        return this.currentShift==shift;
     }
 
     /**
@@ -87,7 +87,7 @@ public class Car {
      * Checks if the car can fit certain number of passengers
      *
      * @param passengers number of the passengers
-     * @return the boolean
+     * @return true if the car can fit certain number of passengers and false if it can't
      */
     public boolean canFitPassengers(int passengers) {
         return seats - 1 >= passengers;
@@ -98,9 +98,9 @@ public class Car {
      *
      * @param passengers the number of passengers
      * @param bags       the number of bags
-     * @return the boolean if the car can endure the weight
+     * @return true if the car can endure/fit the weight of the passengers and bags and false if it can't
      */
-    public boolean canEndure(int passengers, int bags) {
+    public boolean canFit(int passengers, int bags) {
         return (passengers * Weights.PASSENGER_WEIGHT) + (bags * Weights.BAG_WEIGHT + weight) < 3500;
     }
 
@@ -199,16 +199,16 @@ public class Car {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Car information:").append(System.lineSeparator());
-        sb.append("Color: ").append(this.color.toString()).append(System.lineSeparator());
-        sb.append("Doors: ").append(this.doors).append(System.lineSeparator());
-        sb.append("Seats: ").append(this.seats).append(System.lineSeparator());
-        sb.append("Year of production: ").append(this.creationYear.getValue()).append(System.lineSeparator());
-        sb.append("Weight: ").append(this.weight).append(System.lineSeparator());
-        sb.append("Steering wheel: ").append(this.steeringWheel).append(System.lineSeparator());
-        sb.append("Transmission: ").append(this.transmission).append(System.lineSeparator());
-        sb.append("Current shift: ").append(this.currentShift).append(System.lineSeparator());
-        sb.append("Consumption: ").append(this.consumption).append(System.lineSeparator());
+        sb.append("Car information:").append(System.lineSeparator())
+                .append("Color: ").append(this.color.toString()).append(System.lineSeparator())
+                .append("Doors: ").append(this.doors).append(System.lineSeparator())
+                .append("Seats: ").append(this.seats).append(System.lineSeparator())
+                .append("Year of production: ").append(this.creationYear.getValue()).append(System.lineSeparator())
+                .append("Weight: ").append(this.weight).append(System.lineSeparator())
+                .append("Steering wheel: ").append(this.steeringWheel).append(System.lineSeparator())
+                .append("Transmission: ").append(this.transmission).append(System.lineSeparator())
+                .append("Current shift: ").append(this.currentShift).append(System.lineSeparator())
+                .append("Consumption: ").append(this.consumption).append(System.lineSeparator());
 
         return sb.toString();
     }
