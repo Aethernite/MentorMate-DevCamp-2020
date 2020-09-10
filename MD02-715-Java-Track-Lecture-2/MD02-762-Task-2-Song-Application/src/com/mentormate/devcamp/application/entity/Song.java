@@ -4,12 +4,25 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.time.Duration;
 
+/**
+ * The class Song.
+ * <p>
+ * This class represents object template for a song and contains various information about it like title, lyrics, genre and duration of the song.
+ */
 public class Song {
     private String title;
     private String lyrics;
     private Genre genre;
     private Duration duration;
 
+    /**
+     * Instantiates a new Song.
+     *
+     * @param title    the title
+     * @param lyrics   the lyrics
+     * @param genre    the genre
+     * @param duration the duration
+     */
     public Song(String title, String lyrics, Genre genre, Duration duration) {
         this.title = title;
         this.lyrics = lyrics;
@@ -17,19 +30,36 @@ public class Song {
         this.duration = duration;
     }
 
-    public boolean compareGenre(Genre genre){
-        return this.genre == genre;
+    /**
+     * Compare genre boolean.
+     *
+     * @param genre the genre
+     * @return the boolean
+     */
+    public boolean compareGenre(Genre genre) {
+        return this.genre==genre;
     }
 
-    public void printLyrics(){
+    /**
+     * Print lyrics.
+     */
+    public void printLyrics() {
         System.out.println(lyrics);
     }
 
-    public void printDuration(){
-        System.out.println(String.format("Duration: %d:%d",duration.getSeconds()/60, duration.getSeconds()%60));
+    /**
+     * Print duration.
+     */
+    public void printDuration() {
+        System.out.println(String.format("Duration: %d:%d", duration.getSeconds() / 60, duration.getSeconds() % 60));
     }
 
-    public static String getClassCharacteristics(){
+    /**
+     * Get class characteristics string.
+     *
+     * @return the string
+     */
+    public static String getClassCharacteristics() {
         StringBuilder sb = new StringBuilder();
         Class thisClass = Song.class;
         sb.append("Class name: " + thisClass.getSimpleName()).append(System.lineSeparator());
@@ -41,7 +71,7 @@ public class Song {
                 .append(System.lineSeparator());
         sb.append("===========================")
                 .append(System.lineSeparator());
-        for(Field field: fields){
+        for (Field field : fields) {
             sb.append("Field: ")
                     .append(field.getName())
                     .append("Type: ")
@@ -54,7 +84,7 @@ public class Song {
                 .append(System.lineSeparator());
         sb.append("===========================")
                 .append(System.lineSeparator());
-        for(Method method: methods){
+        for (Method method : methods) {
             sb.append("Method name: ")
                     .append(method.getName())
                     .append(" Return type: ")
@@ -64,9 +94,13 @@ public class Song {
         return sb.toString();
     }
 
+    /**
+     * Gets title.
+     *
+     * @return the title
+     */
     public String getTitle() {
         return title;
     }
-
 
 }
