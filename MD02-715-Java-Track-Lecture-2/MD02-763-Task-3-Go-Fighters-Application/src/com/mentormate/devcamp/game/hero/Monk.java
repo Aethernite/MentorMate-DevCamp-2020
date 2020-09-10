@@ -1,13 +1,9 @@
 package com.mentormate.devcamp.game.hero;
 
-import java.util.Random;
-
 /**
  * The type Monk subclass of Hero.
  */
 public class Monk extends Hero {
-    private final Random random;
-    private static final double BLOCK_CHANCE = 0.3000; //30% Block Chance
 
     /**
      * Instantiates a new Monk.
@@ -18,7 +14,7 @@ public class Monk extends Hero {
      */
     public Monk(int health, int attack, int armor) {
         super(health, attack, armor);
-        random = new Random();
+        this.BLOCK_CHANCE = 0.3000; //30% Block Chance
     }
 
     @Override
@@ -27,7 +23,7 @@ public class Monk extends Hero {
             System.out.println("He blocks!");
             return;
         }
-        long damageTaken = points - Math.round(armor * (random.nextDouble() * (1.2 - 0.8) + 0.8));
+        long damageTaken = points - Math.round(randomizeValueByPercentage(armor));
         if (damageTaken < 0) {
             damageTaken = 0;
         }
@@ -35,13 +31,4 @@ public class Monk extends Hero {
         health -= damageTaken;
     }
 
-    /**
-     * Calculates a chance to block an attack.
-     *
-     * @return boolean if the hero is blocking
-     */
-    private boolean isBlocking() {
-        double chance = random.nextDouble();
-        return chance <= BLOCK_CHANCE;
-    }
 }

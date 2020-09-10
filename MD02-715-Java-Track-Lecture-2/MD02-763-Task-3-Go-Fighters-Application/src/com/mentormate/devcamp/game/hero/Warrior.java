@@ -4,7 +4,7 @@ package com.mentormate.devcamp.game.hero;
  * The type Warrior subclass of Hero.
  */
 public class Warrior extends Hero {
-	
+
     /**
      * Instantiates a new Warrior.
      *
