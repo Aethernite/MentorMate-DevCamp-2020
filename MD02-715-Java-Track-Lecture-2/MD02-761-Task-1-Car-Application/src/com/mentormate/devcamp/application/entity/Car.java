@@ -46,8 +46,9 @@ public class Car {
     }
 
     /**
-     * Compare color boolean.
-     *
+     * Compares colors.
+     * 
+     * This method compares a given color to the color of the car.
      * @param color the color
      * @return true if colors are equal
      */
@@ -56,8 +57,9 @@ public class Car {
     }
 
     /**
-     * Compare shift boolean.
+     * Compares shifts.
      *
+     * This method compares a given shift to the current shift of the car.
      * @param shift the shift
      * @return true if the shifts are equal and false if they are not
      */
