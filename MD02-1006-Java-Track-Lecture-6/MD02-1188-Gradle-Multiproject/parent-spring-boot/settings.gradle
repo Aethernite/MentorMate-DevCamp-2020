@@ -1,0 +1,4 @@
+rootProject.name = 'parent-spring-boot'
+include "business"
+include "presentation"
+include "persistence"
