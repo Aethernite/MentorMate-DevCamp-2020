@@ -1,7 +1,7 @@
 # Healthcare Application
 
 Healthcare application
-- API version: 1.0.0
+- API version: 1.0.0-SNAPSHOT
 
 Application created for a small healthcare company that needs an application to solve common problems.
 
@@ -19,8 +19,21 @@ Building the API requires:
 4. Windows/Linux OS
 
 ## Installation
-**MySQL**
-To setup the database simply run the server on port 3306
+**MySQL Setup**
+1. Run the MySQL server on port 3306
+2. Set the account properties **username** and **password** for the MySQL Server in the **application.properties**
+3. Run the API to generate the database
+
+*Default credentials by the application*:
+```
+username=root  
+password=password
+```
+*application.properties file path:*
+
+```
+./Healthcare-Application/src/main/resources/application.properties
+```
 
 **Maven**
 To install the API to your local Maven repository, simply execute:
