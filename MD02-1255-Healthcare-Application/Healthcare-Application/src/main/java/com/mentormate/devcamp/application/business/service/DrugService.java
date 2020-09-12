@@ -68,7 +68,7 @@ public class DrugService {
     /**
      * Update all information for {@link Drug} by its id
      *
-     * @param drugId      Id of the {@link Drug}
+     * @param drugId Id of the {@link Drug}
      * @param updatedDrug {@link FullDrugDTO} new information that will be persisted into database
      * @return Updated {@link Drug}
      */
