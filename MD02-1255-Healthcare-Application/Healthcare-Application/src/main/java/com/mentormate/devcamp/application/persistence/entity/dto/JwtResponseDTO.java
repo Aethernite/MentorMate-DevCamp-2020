@@ -1,0 +1,15 @@
+package com.mentormate.devcamp.application.persistence.entity.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+/**
+ * The type Jwt response dto.
+ * <p>
+ * Contains the jwt token
+ */
+@AllArgsConstructor
+@Data
+public class JwtResponseDTO {
+    private String token;
+}
