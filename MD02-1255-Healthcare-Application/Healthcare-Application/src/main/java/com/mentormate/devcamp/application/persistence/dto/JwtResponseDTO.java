@@ -1,4 +1,4 @@
-package com.mentormate.devcamp.application.persistence.entity.dto;
+package com.mentormate.devcamp.application.persistence.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

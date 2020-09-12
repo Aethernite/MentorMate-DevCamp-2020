@@ -1,6 +1,11 @@
 package com.mentormate.devcamp.application.persistence.entity;
 
-import lombok.*;
+
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -17,6 +22,9 @@ import java.util.Set;
 
 /**
  * The entity User.
+ * 
+ * This is the user in the REST API.
+ * The user can have many roles.
  */
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

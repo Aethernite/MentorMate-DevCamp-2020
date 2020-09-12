@@ -2,13 +2,15 @@ package com.mentormate.devcamp.application.business.service;
 
 import com.mentormate.devcamp.application.persistence.entity.Role;
 import com.mentormate.devcamp.application.persistence.entity.User;
-import com.mentormate.devcamp.application.persistence.entity.dto.JwtResponseDTO;
-import com.mentormate.devcamp.application.persistence.entity.dto.LoginRequestDTO;
-import com.mentormate.devcamp.application.persistence.entity.dto.SignupRequestDTO;
+import com.mentormate.devcamp.application.persistence.dto.JwtResponseDTO;
+import com.mentormate.devcamp.application.persistence.dto.LoginRequestDTO;
+import com.mentormate.devcamp.application.persistence.dto.RoleDTO;
+import com.mentormate.devcamp.application.persistence.dto.SignupRequestDTO;
 import com.mentormate.devcamp.application.persistence.repository.RoleRepository;
 import com.mentormate.devcamp.application.persistence.repository.UserRepository;
 import com.mentormate.devcamp.application.security.util.JwtUtils;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -18,8 +20,10 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
 
 /**
  * The Authentication service.
@@ -35,6 +39,7 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
+    private final ModelMapper modelMapper;
 
     private static final Map<Role.RoleType, Role> roles = new HashMap<>();
 
@@ -55,15 +60,14 @@ public class AuthenticationService {
      * @param createUserDto the create user dto
      */
     public void signup(SignupRequestDTO createUserDto) {
-        Role role = roles.get(Role.RoleType.DOCTOR);
-        if (userRepository.count()==0) {
-            role = roles.get(Role.RoleType.CUSTOMER);
-        }
+        Set<RoleDTO> userRoles = createUserDto.getRoles();
         if (userRepository.findByUsername(createUserDto.getUsername()).isPresent()) {
             throw new RuntimeException(String.format("Username %s already exist", createUserDto.getUsername()));
         }
+        Set<Role> mappedRoles = new HashSet<>();
+        modelMapper.map(userRoles, mappedRoles);
         User user = new User(createUserDto.getUsername(), passwordEncoder.encode(createUserDto.getPassword()), createUserDto.getEmail(),
-                Set.of(role));
+                mappedRoles);
         userRepository.save(user);
     }
 

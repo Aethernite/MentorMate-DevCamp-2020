@@ -1,14 +1,16 @@
-package com.mentormate.devcamp.application.persistence.entity.dto;
+package com.mentormate.devcamp.application.persistence.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 /**
  * The Login request dto.
  * <p>
- * Contains username and password
+ * Contains the user information needed for login
  */
 @RequiredArgsConstructor
+@AllArgsConstructor
 @Data
 public class LoginRequestDTO {
     private String username;

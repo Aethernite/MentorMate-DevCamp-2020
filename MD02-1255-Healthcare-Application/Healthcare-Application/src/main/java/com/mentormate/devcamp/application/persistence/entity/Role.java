@@ -1,6 +1,5 @@
 package com.mentormate.devcamp.application.persistence.entity;
 
-import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -16,7 +15,7 @@ import javax.persistence.Table;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @Entity
 @Table(name = "roles")
 public class Role extends BaseEntity implements GrantedAuthority {
@@ -42,5 +41,5 @@ public class Role extends BaseEntity implements GrantedAuthority {
          */
         DOCTOR;
     }
-
+    
 }

@@ -1,9 +1,9 @@
 package com.mentormate.devcamp.application.presentation.controller;
 
 import com.mentormate.devcamp.application.business.service.AuthenticationService;
-import com.mentormate.devcamp.application.persistence.entity.dto.JwtResponseDTO;
-import com.mentormate.devcamp.application.persistence.entity.dto.LoginRequestDTO;
-import com.mentormate.devcamp.application.persistence.entity.dto.SignupRequestDTO;
+import com.mentormate.devcamp.application.persistence.dto.JwtResponseDTO;
+import com.mentormate.devcamp.application.persistence.dto.LoginRequestDTO;
+import com.mentormate.devcamp.application.persistence.dto.SignupRequestDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
