@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -100,13 +101,12 @@ public class DrugController {
      */
     @Operation(summary = "This request method delete drug by id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Deleted drug"),
+            @ApiResponse(responseCode = "200", description = "Deleted drug"),
             @ApiResponse(responseCode = "404", description = "Drug not found"),
             @ApiResponse(responseCode = "500", description = "Internal Server Error")})
     @DeleteMapping("/{drugId}")
-    public ResponseEntity<Void> deleteDrugById(@PathVariable("drugId") @NotNull Long drugId) {
-        drugService.deleteDrugByID(drugId);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<FullDrugDTO> deleteDrugById(@PathVariable("drugId") @Min(value=1) @NotNull Long drugId) {
+        return new ResponseEntity<>(drugService.deleteDrugByID(drugId),HttpStatus.OK);
     }
 
 }

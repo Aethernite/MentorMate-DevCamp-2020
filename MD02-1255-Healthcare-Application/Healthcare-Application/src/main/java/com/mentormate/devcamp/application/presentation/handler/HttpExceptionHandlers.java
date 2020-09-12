@@ -1,5 +1,6 @@
 package com.mentormate.devcamp.application.presentation.handler;
 
+import javax.persistence.Entity;
 import javax.persistence.EntityNotFoundException;
 
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +26,7 @@ public class HttpExceptionHandlers {
      * @return the response entity
      */
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<String> entityNotFoundException(Exception e) {
+    public ResponseEntity<String> entityNotFoundException(EntityNotFoundException e) {
         log.info(e.getMessage());
         return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
     }

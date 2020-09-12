@@ -11,8 +11,13 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ModelMapperConfiguration {
 
+    /**
+     * Model mapper Bean.
+     *
+     * @return new instance of model mapper
+     */
     @Bean
-    public ModelMapper modelMapper(){
+    public ModelMapper modelMapper() {
         return new ModelMapper();
     }
 }

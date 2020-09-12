@@ -1,4 +1,4 @@
-package com.mentormate.devcamp.application;
+package com.mentormate.devcamp.application.presentation.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,27 +14,26 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
-@DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
+
+@SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
-@SpringBootTest
-class HealthcareApplicationDrugTests {
+@AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
+class DrugControllerTests {
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -91,8 +90,10 @@ class HealthcareApplicationDrugTests {
 
         var newDrugInformation = new DrugDTO("Paracetamol", "paracetamol", "Bulgaria", 3.50);
 
-        var drugInDatabaseWithId = drugRepository.findById(1L);
+        var drugInDatabaseWithId = drugRepository.findByName("Duxet")
+                .orElse(null);
         //when
+        assert drugInDatabaseWithId!=null;
         var response = mvc.perform(put("/api/v1/drugs/{drugId}", drugInDatabaseWithId.getId())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsBytes(newDrugInformation)))
@@ -111,9 +112,11 @@ class HealthcareApplicationDrugTests {
         var drug = modelMapper.map(drugInDatabase, Drug.class);
         drugRepository.save(drug);
 
-        var drugInDatabaseWithId = drugRepository.findById(1L);
+        var drugInDatabaseWithId = drugRepository.findByName("Duxet")
+                .orElse(null);
 
         //when
+        assert drugInDatabaseWithId!=null;
         var response = mvc.perform(get("/api/v1/drugs/{drugId}", drugInDatabaseWithId.getId()))
                 .andExpect(status().isOk())
                 .andReturn();
@@ -140,15 +143,17 @@ class HealthcareApplicationDrugTests {
         var drug = modelMapper.map(drugInDatabase, Drug.class);
         drugRepository.save(drug);
 
-        var drugInDatabaseWithId = drugRepository.findById(1L);
+        var drugInDatabaseWithId = drugRepository.findByName("Duxet")
+                .orElse(null);
         //when
+        assert drugInDatabaseWithId!=null;
         var response = mvc.perform(delete("/api/v1/drugs/{drugId}", drugInDatabaseWithId.getId()))
-                .andExpect(status().isNoContent())
+                .andExpect(status().isOk())
                 .andReturn();
 
         //then
-        assertNull(drugRepository.findById(1L));
-        assertEquals(HttpStatus.NO_CONTENT.value(), response.getResponse().getStatus());
+        assertTrue(drugRepository.findById(drugInDatabaseWithId.getId()).isEmpty());
+        assertEquals(HttpStatus.OK.value(), response.getResponse().getStatus());
     }
 
 }
