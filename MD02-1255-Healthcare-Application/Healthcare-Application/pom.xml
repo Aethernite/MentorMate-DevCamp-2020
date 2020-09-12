@@ -19,6 +19,8 @@
     <properties>
         <java.version>11</java.version>
         <openapi-ui.version>1.4.6</openapi-ui.version>
+        <modelmapper.version>2.3.8</modelmapper.version>
+        <springdoc-openapi.version>1.2.32</springdoc-openapi.version>
     </properties>
 
     <!-- Dependencies -->
@@ -32,6 +34,17 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!-- Spring Validation -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <!-- Model Mapper -->
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>${modelmapper.version}</version>
         </dependency>
         <!-- H2 Database -->
         <dependency>
@@ -76,6 +89,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
         </plugins>
     </build>
 </project>
