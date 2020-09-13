@@ -5,7 +5,6 @@ import com.mentormate.devcamp.application.security.util.JwtAuthenticationEntryPo
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -70,8 +69,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
-                .antMatchers("/api/v1/auth/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/**").permitAll();
+                .antMatchers("/api/v1/auth/signup").permitAll()
+                .antMatchers("/api/v1/auth/signin").permitAll()
+                .antMatchers("/api/v1/auth/customer").hasAnyAuthority("CUSTOMER")
+                .antMatchers("/api/v1/auth/doctor").hasAnyAuthority("DOCTOR");
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }

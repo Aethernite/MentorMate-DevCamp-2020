@@ -10,12 +10,23 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
 
+/**
+ * The Open API 3.0 config.
+ * <p>
+ * This class configures the open API Bearer authorization in the swagger ui
+ */
 @Configuration
 public class OpenApi30Config {
 
     private final String moduleName;
     private final String apiVersion;
 
+    /**
+     * Instantiates a new Open api 3.0 config.
+     *
+     * @param moduleName the module name
+     * @param apiVersion the api version
+     */
     public OpenApi30Config(
             @Value("${module-name}") String moduleName,
             @Value("${api-version}") String apiVersion) {
@@ -23,9 +34,14 @@ public class OpenApi30Config {
         this.apiVersion = apiVersion;
     }
 
+    /**
+     * Custom open API.
+     *
+     * @return the open API
+     */
     @Bean
     public OpenAPI customOpenAPI() {
-        final String securitySchemeName = "bearerAuth";
+        final String securitySchemeName = "JWT Token Authorization";
         final String apiTitle = String.format("%s API", StringUtils.capitalize(moduleName));
         return new OpenAPI()
                 .addSecurityItem(new SecurityRequirement().addList(securitySchemeName))

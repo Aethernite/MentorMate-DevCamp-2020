@@ -2,6 +2,7 @@ package com.mentormate.devcamp.application.presentation.handler;
 
 import javax.persistence.EntityNotFoundException;
 
+import com.mentormate.devcamp.application.presentation.exception.InvalidRoleException;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.http.HttpStatus;
@@ -39,6 +40,18 @@ public class HttpExceptionHandlers {
      */
     @ExceptionHandler(UsernameNotFoundException.class)
     public ResponseEntity<String> usernameNotFoundException(UsernameNotFoundException e) {
+        log.info(e.getMessage());
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+    }
+
+    /**
+     * Invalid role exception response entity.
+     *
+     * @param e the exception
+     * @return the response entity
+     */
+    @ExceptionHandler(InvalidRoleException.class)
+    public ResponseEntity<String> usernameNotFoundException(InvalidRoleException e) {
         log.info(e.getMessage());
         return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
     }

@@ -6,7 +6,6 @@ import com.mentormate.devcamp.application.persistence.dto.RoleDTO;
 import com.mentormate.devcamp.application.persistence.dto.SignupRequestDTO;
 import com.mentormate.devcamp.application.persistence.entity.Role;
 import com.mentormate.devcamp.application.persistence.entity.User;
-import com.mentormate.devcamp.application.persistence.repository.RoleRepository;
 import com.mentormate.devcamp.application.persistence.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

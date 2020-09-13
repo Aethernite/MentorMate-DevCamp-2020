@@ -1,6 +1,5 @@
 package com.mentormate.devcamp.application.persistence.repository;
 
-import com.mentormate.devcamp.application.persistence.entity.Role;
 import com.mentormate.devcamp.application.persistence.entity.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
