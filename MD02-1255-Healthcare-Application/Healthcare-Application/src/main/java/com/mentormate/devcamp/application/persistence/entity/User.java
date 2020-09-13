@@ -47,7 +47,7 @@ public class User extends BaseEntity implements UserDetails {
     @Email
     private String email;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     private Set<Role> roles = new HashSet<>();
 
     @Override

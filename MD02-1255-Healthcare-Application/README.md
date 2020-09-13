@@ -1,4 +1,3 @@
-
 # Healthcare Application
 
 Healthcare application
@@ -24,7 +23,8 @@ Building the API requires:
 1. Run the MySQL server on port 3306
 2. Set the account properties **username** and **password** for the MySQL Server in the **application.properties**
 3. Run the API to generate the database
-4. Add the roles "DOCTOR" and "CUSTOMER" to the database via HeidiSQL or other program.
+
+**Bearer Authorization added to swaggerui**
 
 *Default credentials by the application*:
 ```

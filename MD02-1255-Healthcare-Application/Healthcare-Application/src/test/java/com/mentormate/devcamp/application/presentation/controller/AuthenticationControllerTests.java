@@ -1,12 +1,14 @@
 package com.mentormate.devcamp.application.presentation.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mentormate.devcamp.application.persistence.entity.Role;
 import com.mentormate.devcamp.application.persistence.dto.LoginRequestDTO;
 import com.mentormate.devcamp.application.persistence.dto.RoleDTO;
 import com.mentormate.devcamp.application.persistence.dto.SignupRequestDTO;
+import com.mentormate.devcamp.application.persistence.entity.Role;
+import com.mentormate.devcamp.application.persistence.entity.User;
 import com.mentormate.devcamp.application.persistence.repository.RoleRepository;
 import com.mentormate.devcamp.application.persistence.repository.UserRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,10 +44,7 @@ class AuthenticationControllerTests {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private RoleRepository roleRepository;
-
+    
     @Test
     void signupValidUser() throws Exception {
         //given
@@ -62,6 +61,9 @@ class AuthenticationControllerTests {
                 .content(objectMapper.writeValueAsString(userDTO)))
                 .andExpect(status().isCreated());
 
+        User user = userRepository.findByUsername("borislav").orElse(null);
+        assert user!=null;
+        Assertions.assertEquals(1, userRepository.findAll().size());
     }
 
     @Test

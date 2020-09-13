@@ -20,5 +20,10 @@ public interface RoleRepository extends CrudRepository<Role, Long> {
      */
     Optional<Role> findByName(Role.RoleType name);
 
+    /**
+     * Finds all.
+     *
+     * @return the List of all roles
+     */
     List<Role> findAll();
 }

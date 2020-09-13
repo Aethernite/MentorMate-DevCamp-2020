@@ -72,8 +72,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/api/v1/auth/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/**").permitAll();
-        //.antMatchers("/api/v1/appointments").hasAnyAuthority("DOCTOR")
-        //LATER IMPLEMENTATION IN FUTURE STORIES
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }

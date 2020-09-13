@@ -1,8 +1,6 @@
 package com.mentormate.devcamp.application.persistence.entity;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.Entity;
@@ -15,7 +13,8 @@ import javax.persistence.Table;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 @Entity
 @Table(name = "roles")
 public class Role extends BaseEntity implements GrantedAuthority {
@@ -40,6 +39,7 @@ public class Role extends BaseEntity implements GrantedAuthority {
          * Doctor role type.
          */
         DOCTOR;
+        
     }
     
 }

@@ -1,9 +1,11 @@
 package com.mentormate.devcamp.application.persistence.repository;
 
+import com.mentormate.devcamp.application.persistence.entity.Role;
 import com.mentormate.devcamp.application.persistence.entity.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -34,4 +36,11 @@ public interface UserRepository extends CrudRepository<User, Long> {
      * @return true if it exists and false if it doesn't
      */
     Boolean existsByEmail(String email);
+
+    /**
+     * Finds all.
+     *
+     * @return the List of all users
+     */
+    List<User> findAll();
 }

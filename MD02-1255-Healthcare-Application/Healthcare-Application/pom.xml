@@ -90,17 +90,17 @@
             <artifactId>spring-security-config</artifactId>
             <version>${spring-security.version}</version>
         </dependency>
-        <!-- auth0 JWT -->
-        <dependency>
-            <groupId>com.auth0</groupId>
-            <artifactId>java-jwt</artifactId>
-            <version>${auth0-jwt.version}</version>
-        </dependency>
         <!-- JWTS -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
             <version>${jwts.version}</version>
+        </dependency>
+        <!-- OpenAPI Security -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-security</artifactId>
+            <version>${openapi-ui.version}</version>
         </dependency>
         <!-- Spring Boot Starter Test -->
         <dependency>

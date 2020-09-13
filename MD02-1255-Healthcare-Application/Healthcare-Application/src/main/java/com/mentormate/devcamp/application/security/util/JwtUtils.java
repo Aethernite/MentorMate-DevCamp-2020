@@ -2,8 +2,7 @@ package com.mentormate.devcamp.application.security.util;
 
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,10 +13,10 @@ import java.util.Date;
 /**
  * The Jwt utils class.
  */
+@Slf4j
 @RequiredArgsConstructor
 @Component
 public class JwtUtils {
-    private static final Logger LOGGER = LoggerFactory.getLogger(JwtUtils.class);
 
     @Value("${app.jwtSecret}")
     private String jwtSecret;
@@ -64,15 +63,15 @@ public class JwtUtils {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
             return true;
         } catch (SignatureException e) {
-            LOGGER.error("Invalid JWT signature: {}", e.getMessage());
+            log.error("Invalid JWT signature: {}", e.getMessage());
         } catch (MalformedJwtException e) {
-            LOGGER.error("Invalid JWT token: {}", e.getMessage());
+            log.error("Invalid JWT token: {}", e.getMessage());
         } catch (ExpiredJwtException e) {
-            LOGGER.error("JWT token is expired: {}", e.getMessage());
+            log.error("JWT token is expired: {}", e.getMessage());
         } catch (UnsupportedJwtException e) {
-            LOGGER.error("JWT token is unsupported: {}", e.getMessage());
+            log.error("JWT token is unsupported: {}", e.getMessage());
         } catch (IllegalArgumentException e) {
-            LOGGER.error("JWT claims string is empty: {}", e.getMessage());
+            log.error("JWT claims string is empty: {}", e.getMessage());
         }
 
         return false;
