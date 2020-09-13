@@ -3,7 +3,6 @@ package com.mentormate.devcamp.application.presentation.controller;
 import com.mentormate.devcamp.application.business.service.DrugService;
 import com.mentormate.devcamp.application.persistence.dto.DrugDTO;
 import com.mentormate.devcamp.application.persistence.dto.FullDrugDTO;
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -52,11 +51,12 @@ public class DrugController {
      */
     @Operation(summary = "This request method return all of our drugs")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Return all drugs"),
+            @ApiResponse(responseCode = "200", description = "Return page of drugs"),
+            @ApiResponse(responseCode = "404", description = "Page of drugs not found"),
             @ApiResponse(responseCode = "500", description = "Internal Server Error")})
-    @GetMapping
-    public ResponseEntity<List<FullDrugDTO>> getAll() {
-        return new ResponseEntity<>(drugService.getAll(), HttpStatus.OK);
+    @GetMapping(params = {"page"})
+    public ResponseEntity<List<FullDrugDTO>> getAll(@RequestParam("page") int page) {
+        return new ResponseEntity<>(drugService.findPaginated(page), HttpStatus.OK);
     }
 
     /**
@@ -71,7 +71,7 @@ public class DrugController {
             @ApiResponse(responseCode = "404", description = "Drug not found"),
             @ApiResponse(responseCode = "500", description = "Internal Server Error")})
     @GetMapping("/{drugId}")
-    public ResponseEntity<FullDrugDTO> getDrugById(@PathVariable("drugId") Long drugID) {
+    public ResponseEntity<FullDrugDTO> getDrugById(@PathVariable("drugId") @Min(value = 1) Long drugID) {
         return new ResponseEntity<>(drugService.getDrugById(drugID), HttpStatus.OK);
     }
 
@@ -89,7 +89,7 @@ public class DrugController {
             @ApiResponse(responseCode = "404", description = "Drug not found"),
             @ApiResponse(responseCode = "500", description = "Internal Server Error")})
     @PutMapping("/{drugId}")
-    public ResponseEntity<FullDrugDTO> updateDrugById(@PathVariable("drugId") @NotNull Long drugId, @Valid @RequestBody DrugDTO drugDTO) {
+    public ResponseEntity<FullDrugDTO> updateDrugById(@PathVariable("drugId") @Min(value = 1) @NotNull Long drugId, @Valid @RequestBody DrugDTO drugDTO) {
         return new ResponseEntity<>(drugService.updateDrugByID(drugId, drugDTO), HttpStatus.OK);
     }
 
@@ -105,8 +105,8 @@ public class DrugController {
             @ApiResponse(responseCode = "404", description = "Drug not found"),
             @ApiResponse(responseCode = "500", description = "Internal Server Error")})
     @DeleteMapping("/{drugId}")
-    public ResponseEntity<FullDrugDTO> deleteDrugById(@PathVariable("drugId") @Min(value=1) @NotNull Long drugId) {
-        return new ResponseEntity<>(drugService.deleteDrugByID(drugId),HttpStatus.OK);
+    public ResponseEntity<FullDrugDTO> deleteDrugById(@PathVariable("drugId") @Min(value = 1) @NotNull Long drugId) {
+        return new ResponseEntity<>(drugService.deleteDrugByID(drugId), HttpStatus.OK);
     }
 
 }

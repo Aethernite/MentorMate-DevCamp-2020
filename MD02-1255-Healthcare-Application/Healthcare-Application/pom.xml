@@ -20,9 +20,7 @@
         <java.version>11</java.version>
         <openapi-ui.version>1.4.6</openapi-ui.version>
         <modelmapper.version>2.3.8</modelmapper.version>
-        <springdoc-openapi.version>1.2.32</springdoc-openapi.version>
     </properties>
-
     <!-- Dependencies -->
     <dependencies>
         <!-- Spring Boot Data Jpa -->

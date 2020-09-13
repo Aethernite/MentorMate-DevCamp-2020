@@ -69,7 +69,7 @@ class DrugControllerTests {
 
         expectedDrugs.forEach(drugDTO -> drugRepository.save(modelMapper.map(drugDTO, Drug.class)));
         // when
-        var response = mvc.perform(get("/api/v1/drugs"))
+        var response = mvc.perform(get("/api/v1/drugs/?page=0"))
                 .andExpect(status().isOk())
                 .andReturn();
 

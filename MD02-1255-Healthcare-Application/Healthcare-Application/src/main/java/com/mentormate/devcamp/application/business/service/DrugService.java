@@ -7,11 +7,12 @@ import com.mentormate.devcamp.application.persistence.repository.DrugRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springdoc.api.OpenApiResourceNotFoundException;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -22,6 +23,7 @@ import java.util.stream.StreamSupport;
 @RequiredArgsConstructor
 @Service
 public class DrugService {
+    private static final int PAGE_SIZE = 10;
 
     private final ModelMapper modelMapper;
 
@@ -41,15 +43,19 @@ public class DrugService {
     }
 
     /**
-     * Provide all {@link Drug}'s in all application
+     * Gets a page of {@link Drug}'s
      *
      * @return {@link List<FullDrugDTO>} of our {@link Drug}'s converted to {@link FullDrugDTO}'s
      */
-    public List<FullDrugDTO> getAll() {
+    public List<FullDrugDTO> findPaginated(int page) {
         log.info("Fetch all drugs");
-        return StreamSupport.stream(drugRepository.findAll().spliterator(), false)
+        List<FullDrugDTO> drugs = StreamSupport.stream(drugRepository.findAll(PageRequest.of(page, PAGE_SIZE)).spliterator(), false)
                 .map(drug -> modelMapper.map(drug, FullDrugDTO.class))
                 .collect(Collectors.toList());
+        if (drugs.isEmpty()) {
+            throw new OpenApiResourceNotFoundException("Resources for this page were not found");
+        }
+        return drugs;
     }
 
     /**
@@ -68,7 +74,7 @@ public class DrugService {
     /**
      * Update all information for {@link Drug} by its id
      *
-     * @param drugId Id of the {@link Drug}
+     * @param drugId      Id of the {@link Drug}
      * @param updatedDrug {@link FullDrugDTO} new information that will be persisted into database
      * @return Updated {@link Drug}
      */
