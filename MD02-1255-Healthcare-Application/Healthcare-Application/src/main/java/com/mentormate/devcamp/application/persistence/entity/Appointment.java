@@ -6,7 +6,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
 @EqualsAndHashCode(callSuper = true)
@@ -15,12 +14,15 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 public class Appointment extends BaseEntity {
-    @ManyToOne(optional = false)
-    private User user;
-    @ManyToOne(optional = false)
-    private Patient patient;
+    private String doctor;
+    private String customer;
     private LocalDateTime startTime;
-    private LocalDateTime endTime;
 
+
+    public void update(Appointment appointment) {
+        this.doctor = appointment.getDoctor();
+        this.customer = appointment.getCustomer();
+        this.startTime = appointment.getStartTime();
+    }
 
 }
