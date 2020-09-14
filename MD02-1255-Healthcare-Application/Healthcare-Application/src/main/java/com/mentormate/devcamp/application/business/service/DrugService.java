@@ -7,14 +7,12 @@ import com.mentormate.devcamp.application.persistence.repository.DrugRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.springdoc.api.OpenApiResourceNotFoundException;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 /**
  * This service is responsible to handle all CRUD operation related to {@link Drug}
@@ -47,15 +45,9 @@ public class DrugService {
      *
      * @return {@link List<FullDrugDTO>} of our {@link Drug}'s converted to {@link FullDrugDTO}'s
      */
-    public List<FullDrugDTO> findPaginated(int page) {
+    public Page<FullDrugDTO> findPaginated(int page) {
         log.info("Fetch all drugs");
-        List<FullDrugDTO> drugs = StreamSupport.stream(drugRepository.findAll(PageRequest.of(page, PAGE_SIZE)).spliterator(), false)
-                .map(drug -> modelMapper.map(drug, FullDrugDTO.class))
-                .collect(Collectors.toList());
-        if (drugs.isEmpty()) {
-            throw new OpenApiResourceNotFoundException("Resources for this page were not found");
-        }
-        return drugs;
+        return drugRepository.findAll(PageRequest.of(page, PAGE_SIZE)).map(drug -> modelMapper.map(drug, FullDrugDTO.class));
     }
 
     /**

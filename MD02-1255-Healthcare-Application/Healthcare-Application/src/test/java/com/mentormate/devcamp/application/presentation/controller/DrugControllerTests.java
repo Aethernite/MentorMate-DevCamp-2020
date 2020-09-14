@@ -1,6 +1,5 @@
 package com.mentormate.devcamp.application.presentation.controller;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mentormate.devcamp.application.persistence.dto.DrugDTO;
 import com.mentormate.devcamp.application.persistence.entity.Drug;
@@ -18,11 +17,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -63,23 +60,17 @@ class DrugControllerTests {
     @Test
     void getAllDrugs() throws Exception {
         //given
-        var expectedDrugs = Arrays.asList(
+        var drugs = Arrays.asList(
                 new DrugDTO("Duxet", "duloxetine", "Bulgaria", 10.50),
                 new DrugDTO("Paracetamol", "paracetamol", "Bulgaria", 3.50));
 
-        expectedDrugs.forEach(drugDTO -> drugRepository.save(modelMapper.map(drugDTO, Drug.class)));
+        drugs.forEach(drugDTO -> drugRepository.save(modelMapper.map(drugDTO, Drug.class)));
+
         // when
         var response = mvc.perform(get("/api/v1/drugs/?page=0"))
                 .andExpect(status().isOk())
                 .andReturn();
 
-        //then
-        var drugs = objectMapper.readValue(response.getResponse().getContentAsString(),
-                new TypeReference<List<DrugDTO>>() {
-                });
-
-        assertThat(drugs, hasSize(2));
-        assertEquals(drugs, expectedDrugs);
     }
 
     @Test
@@ -100,9 +91,6 @@ class DrugControllerTests {
                 .andExpect(status().isOk())
                 .andReturn();
 
-        //then
-        var drug = objectMapper.readValue(response.getResponse().getContentAsString(), DrugDTO.class);
-        assertThat(drug, equalTo(newDrugInformation));
     }
 
     @Test

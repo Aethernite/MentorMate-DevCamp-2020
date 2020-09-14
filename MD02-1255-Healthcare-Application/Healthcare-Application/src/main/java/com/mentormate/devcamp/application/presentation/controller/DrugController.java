@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 /**
  * The Drug controller.
@@ -55,7 +55,7 @@ public class DrugController {
             @ApiResponse(responseCode = "404", description = "Page of drugs not found"),
             @ApiResponse(responseCode = "500", description = "Internal Server Error")})
     @GetMapping(params = {"page"})
-    public ResponseEntity<List<FullDrugDTO>> getAll(@RequestParam("page") int page) {
+    public ResponseEntity<Page<FullDrugDTO>> getAll(@RequestParam("page") int page) {
         return new ResponseEntity<>(drugService.findPaginated(page), HttpStatus.OK);
     }
 

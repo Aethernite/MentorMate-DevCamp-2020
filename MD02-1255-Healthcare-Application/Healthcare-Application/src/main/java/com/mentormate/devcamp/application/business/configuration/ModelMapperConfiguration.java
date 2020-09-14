@@ -1,7 +1,6 @@
 package com.mentormate.devcamp.application.business.configuration;
 
 import org.modelmapper.ModelMapper;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

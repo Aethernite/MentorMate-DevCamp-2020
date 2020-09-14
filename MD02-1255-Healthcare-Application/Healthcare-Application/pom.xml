@@ -20,6 +20,7 @@
         <java.version>11</java.version>
         <openapi-ui.version>1.4.6</openapi-ui.version>
         <modelmapper.version>2.3.8</modelmapper.version>
+        <dozer.version>5.5.1</dozer.version>
     </properties>
     <!-- Dependencies -->
     <dependencies>
