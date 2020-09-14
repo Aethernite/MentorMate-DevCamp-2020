@@ -18,7 +18,7 @@ import java.util.Set;
  * <p>
  * Contains the user information needed for the sign-up
  */
-@Schema(description = "Signup Request DTO is a DTO that is used for the transferring the username, email, password and the roles for the sign-up operation", allowableValues = {"username","email","password","roles"})
+@Schema(description = "Signup Request DTO is a DTO that is used for the transferring the username, email, password and the roles for the sign-up operation", allowableValues = {"username", "email", "password", "roles"})
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Data

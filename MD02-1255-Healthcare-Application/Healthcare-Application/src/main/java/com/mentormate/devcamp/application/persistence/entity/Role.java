@@ -1,6 +1,10 @@
 package com.mentormate.devcamp.application.persistence.entity;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.Entity;
@@ -39,7 +43,7 @@ public class Role extends BaseEntity implements GrantedAuthority {
          * Doctor role type.
          */
         DOCTOR;
-        
+
     }
-    
+
 }

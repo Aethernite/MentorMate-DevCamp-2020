@@ -43,7 +43,7 @@ class AuthenticationControllerTests {
 
     @Autowired
     private UserRepository userRepository;
-    
+
     @Test
     void signupValidUser() throws Exception {
         //given
