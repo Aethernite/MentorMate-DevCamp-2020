@@ -52,7 +52,6 @@ public class DrugController {
     @Operation(summary = "This request method return all of our drugs")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Return page of drugs"),
-            @ApiResponse(responseCode = "404", description = "Page of drugs not found"),
             @ApiResponse(responseCode = "500", description = "Internal Server Error")})
     @GetMapping(params = {"page"})
     public ResponseEntity<Page<FullDrugDTO>> getAll(@RequestParam("page") int page) {
