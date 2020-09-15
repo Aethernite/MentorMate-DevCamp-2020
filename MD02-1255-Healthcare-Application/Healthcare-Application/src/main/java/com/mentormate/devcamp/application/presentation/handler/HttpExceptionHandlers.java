@@ -54,4 +54,5 @@ public class HttpExceptionHandlers {
         log.info(e.getMessage());
         return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
     }
+
 }

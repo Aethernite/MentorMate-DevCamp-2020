@@ -25,7 +25,6 @@
         <auth0-jwt.version>3.10.3</auth0-jwt.version>
         <jwts.version>0.9.1</jwts.version>
     </properties>
-
     <!-- Dependencies -->
     <dependencies>
         <!-- Spring Boot Data Jpa -->
@@ -122,6 +121,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
         </plugins>
     </build>
 </project>
