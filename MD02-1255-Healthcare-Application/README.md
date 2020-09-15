@@ -24,6 +24,8 @@ Building the API requires:
 2. Set the account properties **username** and **password** for the MySQL Server in the **application.properties**
 3. Run the API to generate the database
 
+**Bearer Authorization added to swaggerui**
+
 *Default credentials by the application*:
 ```
 username=root  

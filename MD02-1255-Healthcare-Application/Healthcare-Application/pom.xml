@@ -20,7 +20,9 @@
         <java.version>11</java.version>
         <openapi-ui.version>1.4.6</openapi-ui.version>
         <modelmapper.version>2.3.8</modelmapper.version>
-        <dozer.version>5.5.1</dozer.version>
+        <springdoc-openapi.version>1.2.32</springdoc-openapi.version>
+        <spring-security.version>5.4.0</spring-security.version>
+        <jwts.version>0.9.1</jwts.version>
     </properties>
     <!-- Dependencies -->
     <dependencies>
@@ -68,6 +70,36 @@
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>${openapi-ui.version}</version>
         </dependency>
+        <!-- Spring Security Core -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+        <!-- Spring Security Web -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+        <!-- Spring Security Config -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+        <!-- JWTS -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jwts.version}</version>
+        </dependency>
+        <!-- OpenAPI Security -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-security</artifactId>
+            <version>${openapi-ui.version}</version>
+        </dependency>
         <!-- Spring Boot Starter Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -88,7 +120,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-
         </plugins>
     </build>
 </project>
