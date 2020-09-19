@@ -3,6 +3,7 @@ package com.mentormate.devcamp.application.presentation.handler;
 import com.mentormate.devcamp.application.presentation.exception.AppointmentSlotBusyException;
 import com.mentormate.devcamp.application.presentation.exception.InvalidRoleException;
 import com.mentormate.devcamp.application.presentation.exception.NoDoctorRoleFoundException;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -80,4 +81,5 @@ public class HttpExceptionHandlers {
         log.info(e.getMessage());
         return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
     }
+
 }

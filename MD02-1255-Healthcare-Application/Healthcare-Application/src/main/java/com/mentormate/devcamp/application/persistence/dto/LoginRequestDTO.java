@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * The Login request dto.
  * <p>
@@ -16,7 +18,11 @@ import lombok.RequiredArgsConstructor;
 @Data
 public class LoginRequestDTO {
     @Schema(description = "The username of the client")
+
+    @NotBlank
     private String username;
+	
     @Schema(description = "The password of the client")
+    @NotBlank
     private String password;
 }

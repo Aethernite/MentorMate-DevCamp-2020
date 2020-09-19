@@ -24,6 +24,9 @@ import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+/**
+ * The Appointment controller.
+ */
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/appointments")
 @RestController
@@ -47,6 +50,12 @@ public class AppointmentController {
         return new ResponseEntity<>(appointmentService.createAppointment(appointmentDTO), HttpStatus.CREATED);
     }
 
+    /**
+     * Gets appointment by id.
+     *
+     * @param appointmentID the appointment id
+     * @return the appointment by id
+     */
     @Operation(summary = "This request method return appointment by id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Return appointment"),
@@ -57,6 +66,13 @@ public class AppointmentController {
         return new ResponseEntity<>(appointmentService.getAppointmentById(appointmentID), HttpStatus.OK);
     }
 
+    /**
+     * Update appointment by id.
+     *
+     * @param appointmentId  the appointment id
+     * @param appointmentDTO the appointment dto
+     * @return the updated appointment dto
+     */
     @Operation(summary = "This request method update appointment by id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Return updated appointment"),
@@ -68,6 +84,12 @@ public class AppointmentController {
         return new ResponseEntity<>(appointmentService.updateAppointmentById(appointmentId, appointmentDTO), HttpStatus.OK);
     }
 
+    /**
+     * Delete appointment by id.
+     *
+     * @param appointmentId the appointment id
+     * @return the deleted appointment dto
+     */
     @Operation(summary = "This request method delete appointment by id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Deleted appointment"),
@@ -78,6 +100,12 @@ public class AppointmentController {
         return new ResponseEntity<>(appointmentService.deleteAppointmentById(appointmentId), HttpStatus.OK);
     }
 
+    /**
+     * Gets all appointments.
+     *
+     * @param page the page
+     * @return all the appointments
+     */
     @Operation(summary = "This request method return all of the appointments")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Return page of appointments"),
@@ -86,6 +114,5 @@ public class AppointmentController {
     public ResponseEntity<Page<FullAppointmentDTO>> getAll(@RequestParam("page") int page) {
         return new ResponseEntity<>(appointmentService.findPaginated(page), HttpStatus.OK);
     }
-
-
+    
 }

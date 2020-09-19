@@ -11,7 +11,7 @@ import com.mentormate.devcamp.application.persistence.repository.UserRepository;
 import com.mentormate.devcamp.application.presentation.exception.InvalidRoleException;
 import com.mentormate.devcamp.application.security.util.JwtUtils;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -38,7 +38,6 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
-    private final ModelMapper modelMapper;
 
     /**
      * Sign-up.
