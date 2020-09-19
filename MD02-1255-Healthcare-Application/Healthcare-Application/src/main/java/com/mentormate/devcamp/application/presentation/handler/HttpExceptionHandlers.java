@@ -1,9 +1,9 @@
 package com.mentormate.devcamp.application.presentation.handler;
 
 import com.mentormate.devcamp.application.presentation.exception.AppointmentSlotBusyException;
+import com.mentormate.devcamp.application.presentation.exception.DoctorNotFoundException;
 import com.mentormate.devcamp.application.presentation.exception.InvalidRoleException;
 import com.mentormate.devcamp.application.presentation.exception.NoDoctorRoleFoundException;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -59,6 +59,18 @@ public class HttpExceptionHandlers {
     }
 
     /**
+     * Doctor Not Found exception response entity.
+     *
+     * @param e the exception
+     * @return the response entity
+     */
+    @ExceptionHandler(DoctorNotFoundException.class)
+    public ResponseEntity<String> doctorNotFoundException(DoctorNotFoundException e) {
+        log.info(e.getMessage());
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+    }
+
+    /**
      * No Doctor Role Found exception response entity.
      *
      * @param e the exception
@@ -77,7 +89,7 @@ public class HttpExceptionHandlers {
      * @return the response entity
      */
     @ExceptionHandler(AppointmentSlotBusyException.class)
-    public ResponseEntity<String> usernameNotFoundException(AppointmentSlotBusyException e) {
+    public ResponseEntity<String> appointmentSlotNotFoundException(AppointmentSlotBusyException e) {
         log.info(e.getMessage());
         return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
     }

@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -35,6 +37,14 @@ public class DrugService {
      */
     public FullDrugDTO createDrug(DrugDTO drugDTO) {
         Drug drug = modelMapper.map(drugDTO, Drug.class);
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = "";
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        drug.setCreatedBy(username);
         drug = drugRepository.save(drug);
         log.info("Created drug with id {}", drug.getId());
         return modelMapper.map(drug, FullDrugDTO.class);

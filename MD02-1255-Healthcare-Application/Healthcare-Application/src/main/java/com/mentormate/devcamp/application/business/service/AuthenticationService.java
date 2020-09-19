@@ -11,7 +11,6 @@ import com.mentormate.devcamp.application.persistence.repository.UserRepository;
 import com.mentormate.devcamp.application.presentation.exception.InvalidRoleException;
 import com.mentormate.devcamp.application.security.util.JwtUtils;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

@@ -24,7 +24,6 @@ public class RoleDTO {
     @Schema(description = "The name of the role")
     private Role.RoleType name;
 
-
     /**
      * The enum Role type.
      */

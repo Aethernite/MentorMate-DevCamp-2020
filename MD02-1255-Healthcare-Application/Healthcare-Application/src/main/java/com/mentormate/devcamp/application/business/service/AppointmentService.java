@@ -3,12 +3,14 @@ package com.mentormate.devcamp.application.business.service;
 import com.mentormate.devcamp.application.persistence.dto.AppointmentDTO;
 import com.mentormate.devcamp.application.persistence.dto.FullAppointmentDTO;
 import com.mentormate.devcamp.application.persistence.entity.Appointment;
+import com.mentormate.devcamp.application.persistence.entity.Appointment.Status;
 import com.mentormate.devcamp.application.persistence.entity.Role.RoleType;
 import com.mentormate.devcamp.application.persistence.entity.User;
 import com.mentormate.devcamp.application.persistence.repository.AppointmentRepository;
 import com.mentormate.devcamp.application.persistence.repository.RoleRepository;
 import com.mentormate.devcamp.application.persistence.repository.UserRepository;
 import com.mentormate.devcamp.application.presentation.exception.AppointmentSlotBusyException;
+import com.mentormate.devcamp.application.presentation.exception.DoctorNotFoundException;
 import com.mentormate.devcamp.application.presentation.exception.NoDoctorRoleFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,10 +21,16 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 
+/**
+ * The Appointment service.
+ */
 @Slf4j
 @RequiredArgsConstructor
 @Service
 public class AppointmentService {
+    /**
+     * The constant PAGE_SIZE used for pagination.
+     */
     public static final int PAGE_SIZE = 10;
     private static final String NOT_SET = "Customer not specified";
     private final AppointmentRepository appointmentRepository;
@@ -30,9 +38,17 @@ public class AppointmentService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
 
+    /**
+     * Create appointment.
+     *
+     * @param appointmentDTO the appointment dto
+     * @return the created appointment full appointment dto
+     */
     public FullAppointmentDTO createAppointment(AppointmentDTO appointmentDTO) {
         Appointment appointment = modelMapper.map(appointmentDTO, Appointment.class);
-        User user = userRepository.findByUsername(appointment.getDoctor()).orElseThrow(() -> new EntityNotFoundException("The provided doctor doesn't exist"));
+        appointment.setStartTime(appointment.getStartTime().withNano(0));
+        appointment.setStatus(Status.PENDING);
+        User user = userRepository.findByUsername(appointment.getDoctor()).orElseThrow(() -> new DoctorNotFoundException("The provided doctor doesn't exist"));
         if (!user.getRoles().contains(roleRepository.findByName(RoleType.DOCTOR).orElse(null))) {
             throw new NoDoctorRoleFoundException("This user is not a doctor.");
         }
@@ -49,6 +65,12 @@ public class AppointmentService {
         return modelMapper.map(appointment, FullAppointmentDTO.class);
     }
 
+    /**
+     * Delete appointment by id.
+     *
+     * @param appointmentId the appointment id
+     * @return the deleted appointment full appointment dto
+     */
     public FullAppointmentDTO deleteAppointmentById(Long appointmentId) {
         var appointment = appointmentRepository.findById(appointmentId)
                 .orElseThrow(() -> new EntityNotFoundException(String.format("Appointment with id %s is not found", appointmentId)));
@@ -57,6 +79,12 @@ public class AppointmentService {
         return modelMapper.map(appointment, FullAppointmentDTO.class);
     }
 
+    /**
+     * Gets appointment by id.
+     *
+     * @param appointmentId the appointment id
+     * @return the appointment by id full dto
+     */
     public FullAppointmentDTO getAppointmentById(Long appointmentId) {
         log.info("Get appointment by id: {}", appointmentId);
         var drug = appointmentRepository.findById(appointmentId)
@@ -64,6 +92,13 @@ public class AppointmentService {
         return modelMapper.map(drug, FullAppointmentDTO.class);
     }
 
+    /**
+     * Update appointment by id full appointment dto.
+     *
+     * @param appointmentId      the appointment id
+     * @param updatedAppointment the updated appointment
+     * @return the full appointment dto
+     */
     public FullAppointmentDTO updateAppointmentById(Long appointmentId, AppointmentDTO updatedAppointment) {
         log.info("Start updating appointment with id: {}", appointmentId);
         var appointment = appointmentRepository.findById(appointmentId)
@@ -78,6 +113,12 @@ public class AppointmentService {
         return modelMapper.map(appointment, FullAppointmentDTO.class);
     }
 
+    /**
+     * Find paginated.
+     *
+     * @param page the page
+     * @return page of full appointment DTOs
+     */
     public Page<FullAppointmentDTO> findPaginated(int page) {
         log.info("Fetch all appointments");
         return appointmentRepository.findAll(PageRequest.of(page, PAGE_SIZE)).map(appointment -> modelMapper.map(appointment, FullAppointmentDTO.class));

@@ -24,7 +24,6 @@ import java.util.Set;
 @Data
 @Validated
 public class SignupRequestDTO {
-
     @Schema(description = "The username of the client")
     @Size(max = 20, min = 5)
     @NotBlank

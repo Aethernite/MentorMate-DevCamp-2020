@@ -114,5 +114,5 @@ public class AppointmentController {
     public ResponseEntity<Page<FullAppointmentDTO>> getAll(@RequestParam("page") int page) {
         return new ResponseEntity<>(appointmentService.findPaginated(page), HttpStatus.OK);
     }
-    
+
 }
