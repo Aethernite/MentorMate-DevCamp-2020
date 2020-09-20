@@ -1,0 +1,8 @@
+{
+  "short_name": "Social Network React Application",
+  "name": "Social Network React Application",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

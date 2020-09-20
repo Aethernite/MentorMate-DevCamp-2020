@@ -1,0 +1,51 @@
+/* ------------------------------- */
+/* Media Section
+---------------------------------- */
+.media {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: start;
+  align-items: flex-start;
+}
+
+.d-flex {
+  display: -ms-flexbox !important;
+  display: flex !important;
+}
+
+.media .mr-3{
+  margin-right: 1rem !important;
+}
+
+.media img{
+  width: 70px !important;
+  height: 70px !important;
+  padding: 2px;
+  border: 2px solid #f4f4f4;
+} 
+
+.media-body {
+  -ms-flex: 1;
+  flex: 1;
+  padding: .4rem !important;
+}
+
+.media-body p{
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: #000;
+}
+
+.media-body small span{
+  font-family: 'Roboto', sans-serif;
+  font-style: italic;
+  font-size: 12px;
+  color: #aaa;
+  margin-right: 10px;
+}
+
+.fw {
+    width: 100% !important;
+	height: auto;
+}
