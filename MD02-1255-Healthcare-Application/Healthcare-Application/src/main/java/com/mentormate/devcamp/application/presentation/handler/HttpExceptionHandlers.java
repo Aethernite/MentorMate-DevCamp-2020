@@ -2,6 +2,7 @@ package com.mentormate.devcamp.application.presentation.handler;
 
 import com.mentormate.devcamp.application.presentation.exception.AppointmentSlotBusyException;
 import com.mentormate.devcamp.application.presentation.exception.DoctorNotFoundException;
+import com.mentormate.devcamp.application.presentation.exception.DrugNotOwnedException;
 import com.mentormate.devcamp.application.presentation.exception.InvalidRoleException;
 import com.mentormate.devcamp.application.presentation.exception.NoDoctorRoleFoundException;
 import lombok.extern.slf4j.Slf4j;
@@ -92,6 +93,18 @@ public class HttpExceptionHandlers {
     public ResponseEntity<String> appointmentSlotNotFoundException(AppointmentSlotBusyException e) {
         log.info(e.getMessage());
         return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+    }
+
+    /**
+     * Drug not found exception response entity.
+     *
+     * @param e the exception
+     * @return the response entity
+     */
+    @ExceptionHandler(DrugNotOwnedException.class)
+    public ResponseEntity<String> drugNotFoundException(DrugNotOwnedException e) {
+        log.info(e.getMessage());
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.FORBIDDEN);
     }
 
 }

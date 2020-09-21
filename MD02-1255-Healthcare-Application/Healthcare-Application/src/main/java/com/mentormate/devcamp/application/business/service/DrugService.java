@@ -4,6 +4,7 @@ import com.mentormate.devcamp.application.persistence.dto.DrugDTO;
 import com.mentormate.devcamp.application.persistence.dto.FullDrugDTO;
 import com.mentormate.devcamp.application.persistence.entity.Drug;
 import com.mentormate.devcamp.application.persistence.repository.DrugRepository;
+import com.mentormate.devcamp.application.presentation.exception.DrugNotOwnedException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -84,6 +85,16 @@ public class DrugService {
         log.info("Start updating drug with id: {}", drugId);
         var drug = drugRepository.findById(drugId)
                 .orElseThrow(() -> new EntityNotFoundException(String.format("Drug with id %s is not found", drugId)));
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = "";
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        if (!drug.getCreatedBy().equals(username)) {
+            throw new DrugNotOwnedException("This drug is not created by you to update.");
+        }
         drug.update(modelMapper.map(updatedDrug, Drug.class));
         drugRepository.save(drug);
         log.info("Updated drug with id: {}", drugId);
@@ -99,6 +110,16 @@ public class DrugService {
         log.info("Start deleting drug with id {}", drugId);
         var drug = drugRepository.findById(drugId)
                 .orElseThrow(() -> new EntityNotFoundException(String.format("Drug with id %s is not found", drugId)));
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = "";
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        if (!drug.getCreatedBy().equals(username)) {
+            throw new DrugNotOwnedException("This drug is not created by you to delete.");
+        }
         drugRepository.delete(drug);
         log.info("Deleted drug with id {}", drugId);
         return modelMapper.map(drug, FullDrugDTO.class);
