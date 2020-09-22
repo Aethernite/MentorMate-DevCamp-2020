@@ -10,6 +10,7 @@ import java.util.stream.Stream;
  * The Matrix multiplication application.
  */
 public class MatrixMultiplicationApplication {
+
     private int[][] matrix1;
     private int[][] matrix2;
     private int[][] result;
@@ -33,7 +34,7 @@ public class MatrixMultiplicationApplication {
         matrix1 = getMatrixByUserInput();
         System.out.println("Enter dimensions(R C) for second matrix:");
         matrix2 = getMatrixByUserInput();
-        if (matrix1[0].length!=matrix2.length) {
+        if (matrix1[0].length != matrix2.length) {
             throw new NonMultiplicativeMatrixException();
         }
     }

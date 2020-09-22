@@ -6,6 +6,7 @@ package com.mentormate.devcamp.application.thread;
  * One thread is working only on one cell
  */
 public class WorkerThread extends Thread {
+    
     private final int row;
     private final int col;
     private final int[][] matrix1;

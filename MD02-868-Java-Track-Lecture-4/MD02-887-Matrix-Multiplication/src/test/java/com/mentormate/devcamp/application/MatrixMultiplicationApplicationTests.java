@@ -23,12 +23,12 @@ public class MatrixMultiplicationApplicationTests {
         Assertions.assertTrue(() -> {
                     try {
                         int[][] result = application.start(matrix1, matrix2);
-                        if (result.length!=expected.length) {
+                        if (result.length != expected.length) {
                             return false;
                         }
                         for (int i = 0; i < result.length; i++) {
                             for (int j = 0; j < result[0].length; j++) {
-                                if (result[i][j]!=expected[i][j]) {
+                                if (result[i][j] != expected[i][j]) {
                                     return false;
                                 }
                             }
