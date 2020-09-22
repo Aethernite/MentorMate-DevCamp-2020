@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.NoSuchElementException;
 
 public class MyQueueTests {
+
     private Queue<Integer> queue;
 
     @BeforeEach

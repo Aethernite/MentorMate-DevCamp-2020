@@ -6,6 +6,7 @@ package com.mentormate.devcamp.util.interfaces;
  * @param <E> the type parameter
  */
 public interface Queue<E> {
+    
     /**
      * Add an element to the queue.
      *

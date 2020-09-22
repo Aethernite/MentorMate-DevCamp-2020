@@ -6,6 +6,12 @@ package com.mentormate.devcamp.util.interfaces;
  * @param <T> the type parameter
  */
 public interface List<T> extends Deque<T> {
+
+    /**
+     * Adds a value at the end of the list.
+     *
+     * @param value the value
+     */
     public boolean add(T value);
 
     /**

@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.NoSuchElementException;
 
 public class MyDequeTests {
+    
     private Deque<Integer> deque;
 
     @BeforeEach
