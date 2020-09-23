@@ -6,7 +6,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -17,7 +16,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Data
 @Entity
-public class Appointment extends BaseEntity implements Serializable {
+public class Appointment extends BaseEntity {
     private String doctor;
     private String customer;
     private LocalDateTime startTime;

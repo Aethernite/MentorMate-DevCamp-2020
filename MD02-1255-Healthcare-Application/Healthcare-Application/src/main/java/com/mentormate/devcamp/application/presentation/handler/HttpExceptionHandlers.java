@@ -4,6 +4,7 @@ import com.mentormate.devcamp.application.presentation.exception.AppointmentSlot
 import com.mentormate.devcamp.application.presentation.exception.DoctorNotFoundException;
 import com.mentormate.devcamp.application.presentation.exception.DrugNotOwnedException;
 import com.mentormate.devcamp.application.presentation.exception.InvalidRoleException;
+import com.mentormate.devcamp.application.presentation.exception.InvalidStatusException;
 import com.mentormate.devcamp.application.presentation.exception.NoDoctorRoleFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -102,9 +103,22 @@ public class HttpExceptionHandlers {
      * @return the response entity
      */
     @ExceptionHandler(DrugNotOwnedException.class)
-    public ResponseEntity<String> drugNotFoundException(DrugNotOwnedException e) {
+    public ResponseEntity<String> drugNotOwnedException(DrugNotOwnedException e) {
         log.info(e.getMessage());
         return new ResponseEntity<>(e.getMessage(), HttpStatus.FORBIDDEN);
+    }
+
+
+    /**
+     * Invalid status in the request body.
+     *
+     * @param e the exception
+     * @return the response entity
+     */
+    @ExceptionHandler(InvalidStatusException.class)
+    public ResponseEntity<String> drugNotFoundException(InvalidStatusException e) {
+        log.info(e.getMessage());
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
 }

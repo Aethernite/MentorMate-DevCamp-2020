@@ -61,7 +61,7 @@ class AuthenticationControllerTests {
                 .andExpect(status().isCreated());
 
         User user = userRepository.findByUsername("borislav").orElse(null);
-        assert user!=null;
+        assert user != null;
         Assertions.assertEquals(1, userRepository.findAll().size());
     }
 

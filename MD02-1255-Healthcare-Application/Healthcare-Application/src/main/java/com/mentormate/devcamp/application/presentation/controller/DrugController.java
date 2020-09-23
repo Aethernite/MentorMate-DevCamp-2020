@@ -31,7 +31,7 @@ import javax.validation.constraints.NotNull;
  */
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/v1/doctors/drugs")
+@RequestMapping("/api/v1/drugs")
 public class DrugController {
 
     private final DrugService drugService;

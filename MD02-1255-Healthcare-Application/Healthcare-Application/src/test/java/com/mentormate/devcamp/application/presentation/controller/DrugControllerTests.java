@@ -70,7 +70,7 @@ class DrugControllerTests {
         var drugDTO = new DrugDTO("Duxet", "duloxetine", "Bulgaria", 10.50);
 
         //when
-        mvc.perform(post("/api/v1/doctors/drugs")
+        mvc.perform(post("/api/v1/drugs")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(drugDTO)))
@@ -84,7 +84,7 @@ class DrugControllerTests {
         var drugDTO = new DrugDTO("Duxet", "duloxetine", "Bulgaria", 10.50);
 
         //when
-        mvc.perform(post("/api/v1/doctors/drugs")
+        mvc.perform(post("/api/v1/drugs")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(drugDTO)))
@@ -97,7 +97,7 @@ class DrugControllerTests {
         var drugDTO = new DrugDTO("Duxet", "duloxetine", "Bulgaria", 10.50);
 
         //when
-        mvc.perform(post("/api/v1/doctors/drugs")
+        mvc.perform(post("/api/v1/drugs")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(drugDTO)))
@@ -114,7 +114,7 @@ class DrugControllerTests {
 
         drugs.forEach(drugDTO -> {
             try {
-                mvc.perform(post("/api/v1/doctors/drugs")
+                mvc.perform(post("/api/v1/drugs")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(drugDTO)))
@@ -125,7 +125,7 @@ class DrugControllerTests {
         });
 
         // when
-        var response = mvc.perform(get("/api/v1/doctors/drugs/?page=0"))
+        var response = mvc.perform(get("/api/v1/drugs/?page=0"))
                 .andExpect(status().isOk())
                 .andReturn();
 
@@ -137,7 +137,7 @@ class DrugControllerTests {
         //given
         var drugInDatabase = new DrugDTO("Duxet", "duloxetine", "Bulgaria", 10.50);
 
-        mvc.perform(post("/api/v1/doctors/drugs")
+        mvc.perform(post("/api/v1/drugs")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(drugInDatabase)))
@@ -148,8 +148,8 @@ class DrugControllerTests {
         var drugInDatabaseWithId = drugRepository.findByName("Duxet")
                 .orElse(null);
         //when
-        assert drugInDatabaseWithId!=null;
-        var response = mvc.perform(put("/api/v1/doctors/drugs/{drugId}", drugInDatabaseWithId.getId())
+        assert drugInDatabaseWithId != null;
+        var response = mvc.perform(put("/api/v1/drugs/{drugId}", drugInDatabaseWithId.getId())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsBytes(newDrugInformation)))
                 .andExpect(status().isOk())
@@ -163,7 +163,7 @@ class DrugControllerTests {
         //given
         var drugInDatabase = new DrugDTO("Duxet", "duloxetine", "Bulgaria", 10.50);
 
-        mvc.perform(post("/api/v1/doctors/drugs")
+        mvc.perform(post("/api/v1/drugs")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(drugInDatabase)))
@@ -173,8 +173,8 @@ class DrugControllerTests {
                 .orElse(null);
 
         //when
-        assert drugInDatabaseWithId!=null;
-        var response = mvc.perform(get("/api/v1/doctors/drugs/{drugId}", drugInDatabaseWithId.getId()))
+        assert drugInDatabaseWithId != null;
+        var response = mvc.perform(get("/api/v1/drugs/{drugId}", drugInDatabaseWithId.getId()))
                 .andExpect(status().isOk())
                 .andReturn();
 
@@ -188,7 +188,7 @@ class DrugControllerTests {
     void getDrugByIdThatNotExist() throws Exception {
         //when
         long invalidId = 100L;
-        var response = mvc.perform(delete("/api/v1/doctors/drugs/{drugId}", invalidId))
+        var response = mvc.perform(delete("/api/v1/drugs/{drugId}", invalidId))
                 .andExpect(status().isNotFound())
                 .andReturn();
         assertEquals(HttpStatus.NOT_FOUND.value(), response.getResponse().getStatus());
@@ -200,7 +200,7 @@ class DrugControllerTests {
         //given
         var drugInDatabase = new DrugDTO("Duxet", "duloxetine", "Bulgaria", 10.50);
 
-        mvc.perform(post("/api/v1/doctors/drugs")
+        mvc.perform(post("/api/v1/drugs")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(drugInDatabase)))
@@ -209,8 +209,8 @@ class DrugControllerTests {
         var drugInDatabaseWithId = drugRepository.findByName("Duxet")
                 .orElse(null);
         //when
-        assert drugInDatabaseWithId!=null;
-        var response = mvc.perform(delete("/api/v1/doctors/drugs/{drugId}", drugInDatabaseWithId.getId()))
+        assert drugInDatabaseWithId != null;
+        var response = mvc.perform(delete("/api/v1/drugs/{drugId}", drugInDatabaseWithId.getId()))
                 .andExpect(status().isOk())
                 .andReturn();
 
