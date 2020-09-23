@@ -50,6 +50,7 @@ public class AppointmentService {
      */
     public FullAppointmentDTO createAppointment(AppointmentDTO appointmentDTO) {
         Appointment appointment = modelMapper.map(appointmentDTO, Appointment.class);
+        
         appointment.setStartTime(appointment.getStartTime().withNano(0));
         appointment.setStatus(Status.PENDING);
         User user = userRepository.findByUsername(appointment.getDoctor())
