@@ -7,10 +7,12 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 //Bootstrap
 import { Col, Navbar, Dropdown, Container } from 'react-bootstrap';
-//Authentication hook
-import { useAuth } from '../contexts/AuthContext';
 //React Router Dom
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { Search } from './UsersSearch'
+import { placeholder, generateMediaUrl } from '../utilities';
+import { logout } from '../store/slices/auth';
 
 const Text = styled.span`
 color: #FFF;
@@ -30,14 +32,6 @@ transition: transform 0.2s;
 }
 `;
 
-const Input = styled.input`
-display: inline-block;
-position: relative;
-width: 25%;
-&::placeholder{
- font-size: 100%;
-}
-`;
 
 const IconCogWheel = styled.i`
 transform: scale(1.5);
@@ -70,7 +64,7 @@ transition: transform 0.2s;
 padding: 0.5rem;
 &:hover{
     color: #FFF;
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 `;
 
@@ -80,24 +74,24 @@ padding: 0.5rem;
 //
 function NavigationBar() {
 
-    const { user, logout, mockedUser } = useAuth();
-
+    const user = useSelector(state => state.auth.user);
+    const dispatch = useDispatch();
     return (
-        <Container fluid="xs" className="fixed-top">
+        <Container fluid="xs" className="sticky-top">
             <Navbar bg="dark" >
                 <Link to="/">
                     <Navbar.Brand>
                         <Text>Socify</Text>
                     </Navbar.Brand>
                 </Link>
-                {user && <Input type="text" id="input-search" className="form-control d-none d-sm-block" placeholder="Find friends..." />}
+                {user && <Search />}
                 <Col>
                     {user &&
                         <Dropdown className="float-right">
-                            <Dropdown.Toggle as={Avatar} src={mockedUser.avatar} className="rounded-circle" />
+                            <Dropdown.Toggle as={Avatar} style={{ objectFit: 'cover' }} src={user.avatarId ? generateMediaUrl(user.avatarId) : placeholder} className="rounded-circle" />
                             <Dropdown.Menu>
-                                <Dropdown.Item><Link to="/me" style={{ padding: '0px' }}>My Profile</Link></Dropdown.Item>
-                                <Dropdown.Item><Link to="/login" onClick={logout} style={{ padding: '0px' }}>Sign out</Link></Dropdown.Item>
+                                <Dropdown.Item><Link to="/users/me" style={{ padding: '0px' }}>My Profile</Link></Dropdown.Item>
+                                <Dropdown.Item><Link to="/login" onClick={() => dispatch(logout())} style={{ padding: '0px' }}>Sign out</Link></Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>}
 

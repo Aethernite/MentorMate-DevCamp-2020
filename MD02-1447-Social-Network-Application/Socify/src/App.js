@@ -7,17 +7,26 @@ import AppRoutes from './AppRoutes';
 import {
   BrowserRouter as Router,
 } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { checkSession } from './store/slices/auth.js';
 //Authentication Context Provider
-import { AuthContextProvider } from './contexts/AuthContext';
 
 function App() {
 
+  const isSessionChecked = useSelector(state => state.auth.isSessionChecked);
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    dispatch(checkSession());
+  }, [dispatch]);
+
+  if (!isSessionChecked) {
+    return null;
+  }
+
   return (
     <Router>
-      <AuthContextProvider>
-        <NavigationBar />
-        <AppRoutes />
-      </AuthContextProvider>
+      <NavigationBar />
+      <AppRoutes />
     </Router>
 
   )

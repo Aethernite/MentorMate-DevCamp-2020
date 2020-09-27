@@ -5,24 +5,26 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 //Bootstrap
 import { Form, FormGroup, Button, Col, Row, Container, Alert, Spinner } from 'react-bootstrap';
-//CSS Files
-import './css/Forms.css';
+//CSS
+import '../../css/Forms.css';
 //Formik
 import { useFormik } from 'formik';
 //Yup validation
 import * as Yup from 'yup';
 //Class names
 import classNames from 'classnames';
-//Authentication hook
-import { useAuth } from '../contexts/AuthContext';
 //React Router Dom
 import { Link } from 'react-router-dom';
+import { login } from '../../store/slices/auth';
+import { useSelector, useDispatch } from 'react-redux';
 
 
 
 function LoginPage() {
 
-    const { error, login } = useAuth();
+    const error = useSelector(state => state.auth.error);
+    const isLoading = useSelector(state => state.auth.isLoading);
+    const dispatch = useDispatch();
 
     const validationSchema = Yup.object({
         username: Yup.string().required('Username is required'),
@@ -36,23 +38,14 @@ function LoginPage() {
             password: ''
         },
 
-        onSubmit: async (values) => {
-            try {
-                formik.setSubmitting(true);
-                await login(values);
-            } catch (ok) {
-
-            }
-            finally {
-                formik.setSubmitting(false);
-            }
-
+        onSubmit: (values) => {
+            dispatch(login(values))
         },
         validationSchema: validationSchema,
     });
 
     return (
-        <Container fluid style={{ paddingTop: '6rem' }}>
+        <Container fluid style={{ paddingTop: '2rem' }}>
             <Row>
                 <Col className="col-md-4 mx-auto">
                     <div className="myform">
@@ -62,7 +55,7 @@ function LoginPage() {
                                 <h2>Login</h2>
                             </div>
                         </div>
-                        {error && <Alert variant="danger">{error.message}</Alert>}
+                        {error && <Alert variant="danger">{error}</Alert>}
                         <Form onSubmit={formik.handleSubmit}>
                             <FormGroup>
                                 <label className="form-label">Username</label>
@@ -76,8 +69,8 @@ function LoginPage() {
                                 <p className="text-center">By signing up you accept our <a href="#TermsOfUse">Terms Of Use</a></p>
                             </FormGroup>
                             <div className="col-md-12 text-center ">
-                                <Button disabled={!formik.isValid} hidden={formik.isSubmitting} type="submit" className="btn-block mybtn btn-primary tx-tfm">Login</Button>
-                                <Spinner hidden={!formik.isSubmitting} animation="border" role="status">
+                                <Button disabled={!formik.isValid} hidden={isLoading} type="submit" className="btn-block mybtn btn-dark tx-tfm">Login</Button>
+                                <Spinner hidden={!isLoading} animation="border" role="status">
                                     <span className="sr-only">Loading...</span>
                                 </Spinner>
                             </div>

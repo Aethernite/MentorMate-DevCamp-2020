@@ -4,13 +4,14 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 //Post component
-import Post from './Post'
+import Post from '../Post'
+import PostForm from '../PostForm';
 
-function NewsPage({ mockedPosts }) {
-
+function PostsPage({ posts }) {
     return (
-        <section style={{ paddingTop: '8rem' }}>
-            {mockedPosts.map((post, index) => (
+        <section style={{ paddingTop: '3rem' }}>
+            <PostForm></PostForm>
+            {posts.map((post, index) => (
                 <Post
                     key={index}
                     post={post}
@@ -20,4 +21,4 @@ function NewsPage({ mockedPosts }) {
     );
 }
 
-export default NewsPage;
+export default PostsPage;

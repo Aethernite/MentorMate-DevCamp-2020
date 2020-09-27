@@ -2,19 +2,16 @@ import React from 'react';
 //React-Router-Dom
 import { Switch, Route, Redirect } from 'react-router-dom';
 //Pages
-import LoginPage from './components/LoginPage.js'
-import RegisterPage from './components/RegisterPage.js'
-import Profile from './components/ProfilePage'
-import NewsPage from './components/NewsPage.js';
-//Authorization
-import { useAuth } from './contexts/AuthContext';
+import LoginPage from './components/pages/LoginPage.js'
+import RegisterPage from './components/pages/RegisterPage.js'
+import Profile from './components/pages/ProfilePage'
+import NewsPage from './components/pages/NewsPage.js';
 //Mocks
-import { generatePosts } from './FakerMocks.js';
+import { useSelector } from 'react-redux';
 
 const AppRoutes = () => {
 
-    const { user } = useAuth();
-    const mockedPosts = generatePosts(20);
+    const user = useSelector(state => state.auth.user);
 
     if (!user) {
         return (
@@ -28,8 +25,8 @@ const AppRoutes = () => {
     else {
         return (
             <Switch>
-                <Route path="/newsfeed" exact component={() => <NewsPage mockedPosts={mockedPosts} />} />
-                <Route path="/me" exact component={Profile} />
+                <Route path="/newsfeed" exact component={NewsPage} />
+                <Route path="/users/:username" exact component={Profile} />
                 <Redirect to="/newsfeed" />
             </Switch>
         );

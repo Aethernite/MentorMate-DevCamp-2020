@@ -2,10 +2,9 @@ import React from 'react';
 //Styled Components
 import styled from 'styled-components';
 //Post subcomponents
-import PostHeader from './subcomponents/PostHeader.js';
-import PostContent from './subcomponents/PostContent.js';
-import PostBase from './subcomponents/PostBase.js';
-import PostComments from './subcomponents/PostComments.js';
+import PostHeader from './subcomponents/post/PostHeader.js';
+import PostContent from './subcomponents/post/PostContent.js';
+import PostBase from './subcomponents/post/PostBase.js';
 //CSS Libraries
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
@@ -24,7 +23,7 @@ margin-bottom: 20px;
 padding: 0px !important;
 `;
 
-function Post({ post }) {
+function Post({ post, key }) {
     return (
         <Section>
             <div className="container">
@@ -34,7 +33,6 @@ function Post({ post }) {
                             <PostHeader post={post} />
                             <PostContent post={post} />
                             <PostBase post={post} />
-                            <PostComments />
                         </Cardbox>
                     </div>
                 </div>

@@ -1,13 +1,12 @@
 import React from 'react';
-import { useState } from 'react';
 //CSS Libraries
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 //Bootstrap
 import { Form, FormGroup, Button, Col, Row, Container, Spinner, Alert } from 'react-bootstrap';
-//CSS Files
-import './css/Forms.css';
+//CSS
+import '../../css/Forms.css';
 //Yup validation
 import * as Yup from 'yup';
 //Formik
@@ -17,7 +16,8 @@ import classNames from 'classnames';
 //React-Router-Dom
 import { Link } from 'react-router-dom';
 //Authentication hook
-import { useAuth } from '../contexts/AuthContext';
+import { useSelector, useDispatch } from 'react-redux';
+import { register, clearErrors } from '../../store/slices/auth'
 
 function RegisterPage() {
 
@@ -53,27 +53,20 @@ function RegisterPage() {
             password: ''
         },
         onSubmit: async (values) => {
-            try {
-                formik.setSubmitting(true);
-                setSuccess(false);
-                const data = { 'name': values.firstname + " " + values.lastname, 'username': values.username, 'password': values.password };
-                await register(data);
-                setSuccess(true);
-            } catch (ok) {
-                setSuccess(false);
-            }
-            finally {
-                formik.setSubmitting(false);
-            }
+            dispatch(register(values))
         },
         validationSchema: validationSchema,
     });
 
-    const { register, error } = useAuth();
-    const [success, setSuccess] = useState(false);
+    const error = useSelector(state => state.auth.error);
+    const dispatch = useDispatch();
+
+    React.useEffect(() => {
+        dispatch(clearErrors());
+    }, [dispatch]);
 
     return (
-        <Container fluid style={{ paddingTop: '6rem' }}>
+        <Container fluid style={{ paddingTop: '2rem' }}>
             <Row>
                 <Col className="col-md-4 mx-auto">
                     <div className="myform">
@@ -83,8 +76,7 @@ function RegisterPage() {
                                 <h2>Signup</h2>
                             </div>
                         </div>
-                        {error && <Alert variant="danger">{error?.message}</Alert>}
-                        {success && !error && <Alert variant="success">{"Registration successful!"}</Alert>}
+                        {error && <Alert variant="danger">{error}</Alert>}
                         <Form onSubmit={formik.handleSubmit}>
                             <FormGroup>
                                 <label className="form-label">First Name</label>
@@ -115,7 +107,7 @@ function RegisterPage() {
                                 <Alert variant="danger">{formik.errors.password}</Alert>
                             ) : null}
                             <div className="col-md-12 text-center mb-3">
-                                <Button disabled={!formik.isValid} hidden={formik.isSubmitting} type="submit" className="btn-block mybtn btn-primary tx-tfm">Get Started For Free</Button>
+                                <Button disabled={!formik.isValid} hidden={formik.isSubmitting} type="submit" className="btn-block mybtn btn-dark tx-tfm">Get Started For Free</Button>
                                 <Spinner hidden={!formik.isSubmitting} animation="border" role="status">
                                     <span className="sr-only">Loading...</span>
                                 </Spinner>
@@ -130,7 +122,7 @@ function RegisterPage() {
                     </div>
                 </Col>
             </Row>
-        </Container>
+        </Container >
     );
 }
 
