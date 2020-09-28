@@ -1,0 +1,26 @@
+.search {
+display: inline-block;
+position: relative;
+width: 25%;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    color: #212121;
+    font-family: 'Roboto', sans-serif;
+    overflow-x:hidden;
+}
+
+.item > img{
+   margin-right: 15px;
+}
+
+.item > a{
+    text-decoration: none;
+ }
+
+ .username {
+     color: #5f6368;
+     font-size: 0.75rem;
+ }
