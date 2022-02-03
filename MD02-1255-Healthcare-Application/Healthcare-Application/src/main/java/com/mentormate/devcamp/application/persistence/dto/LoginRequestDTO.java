@@ -17,9 +17,11 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @Data
 public class LoginRequestDTO {
+
     @Schema(description = "The username of the client")
     @NotBlank
     private String username;
+
     @Schema(description = "The password of the client")
     @NotBlank
     private String password;

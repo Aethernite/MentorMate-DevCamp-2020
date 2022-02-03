@@ -46,6 +46,8 @@ public class DrugController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Drug is created successfully"),
             @ApiResponse(responseCode = "400", description = "The request body is not correct"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized"),
+            @ApiResponse(responseCode = "403", description = "Forbidden"),
             @ApiResponse(responseCode = "500", description = "Internal Server Error")})
     @PostMapping
     public ResponseEntity<FullDrugDTO> createDrug(@RequestBody @Valid DrugDTO drugDTO) {
@@ -60,6 +62,8 @@ public class DrugController {
     @Operation(summary = "This request method return all of our drugs")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Return page of drugs"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized"),
+            @ApiResponse(responseCode = "403", description = "Forbidden"),
             @ApiResponse(responseCode = "500", description = "Internal Server Error")})
     @GetMapping(params = {"page"})
     public ResponseEntity<Page<FullDrugDTO>> getAll(@RequestParam("page") int page) {
@@ -75,6 +79,8 @@ public class DrugController {
     @Operation(summary = "This request method return drug by id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Return drug"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized"),
+            @ApiResponse(responseCode = "403", description = "Forbidden"),
             @ApiResponse(responseCode = "404", description = "Drug not found"),
             @ApiResponse(responseCode = "500", description = "Internal Server Error")})
     @GetMapping("/{drugId}")
@@ -93,6 +99,8 @@ public class DrugController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Return updated drug"),
             @ApiResponse(responseCode = "400", description = "The request body is not correct"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized"),
+            @ApiResponse(responseCode = "403", description = "Forbidden"),
             @ApiResponse(responseCode = "404", description = "Drug not found"),
             @ApiResponse(responseCode = "500", description = "Internal Server Error")})
     @PutMapping("/{drugId}")
@@ -109,6 +117,8 @@ public class DrugController {
     @Operation(summary = "This request method delete drug by id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Deleted drug"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized"),
+            @ApiResponse(responseCode = "403", description = "Forbidden"),
             @ApiResponse(responseCode = "404", description = "Drug not found"),
             @ApiResponse(responseCode = "500", description = "Internal Server Error")})
     @DeleteMapping("/{drugId}")

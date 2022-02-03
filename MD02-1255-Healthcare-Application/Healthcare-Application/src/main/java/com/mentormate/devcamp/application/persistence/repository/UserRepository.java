@@ -1,9 +1,13 @@
 package com.mentormate.devcamp.application.persistence.repository;
 
+import com.mentormate.devcamp.application.persistence.entity.Role;
 import com.mentormate.devcamp.application.persistence.entity.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,4 +46,12 @@ public interface UserRepository extends CrudRepository<User, Long> {
      * @return the List of all users
      */
     List<User> findAll();
+
+    /**
+     * Finds all users with certain roles.
+     *
+     * @return the List of all doctors
+     */
+    Page<User> findByRolesIn(Collection<Role> roles, Pageable pageable);
+
 }

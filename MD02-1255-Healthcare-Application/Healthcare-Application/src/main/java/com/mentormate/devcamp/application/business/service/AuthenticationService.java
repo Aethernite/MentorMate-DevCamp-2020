@@ -49,7 +49,8 @@ public class AuthenticationService {
             throw new UsernameNotFoundException(String.format("Username %s already exist", createUserDto.getUsername()));
         }
         Set<Role> mappedRoles = new HashSet<>();
-        userRoles.forEach(role -> mappedRoles.add(roleRepository.findByName(role.getName()).orElseThrow(() -> new InvalidRoleException("Invalid role was supplied by the request body"))));
+        userRoles.forEach(role -> mappedRoles.add(roleRepository.findByName(role.getName())
+                .orElseThrow(() -> new InvalidRoleException("Invalid role was supplied by the request body"))));
         User user = new User(createUserDto.getUsername(), passwordEncoder.encode(createUserDto.getPassword()), createUserDto.getEmail(),
                 mappedRoles);
         userRepository.save(user);

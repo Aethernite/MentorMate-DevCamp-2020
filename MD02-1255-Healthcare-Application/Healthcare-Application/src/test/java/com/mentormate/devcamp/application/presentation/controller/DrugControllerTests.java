@@ -2,8 +2,8 @@ package com.mentormate.devcamp.application.presentation.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mentormate.devcamp.application.persistence.dto.DrugDTO;
-import com.mentormate.devcamp.application.persistence.entity.Drug;
 import com.mentormate.devcamp.application.persistence.repository.DrugRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +13,11 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Arrays;
 
@@ -22,6 +25,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -47,7 +52,19 @@ class DrugControllerTests {
     @Autowired
     private DrugRepository drugRepository;
 
+    @Autowired
+    private WebApplicationContext context;
+
+    @BeforeEach
+    void init() {
+        mvc = MockMvcBuilders
+                .webAppContextSetup(context)
+                .apply(springSecurity())
+                .build();
+    }
+
     @Test
+    @WithMockUser(username = "doctor", authorities = "DOCTOR")
     void createNewDrug() throws Exception {
         //given
         var drugDTO = new DrugDTO("Duxet", "duloxetine", "Bulgaria", 10.50);
@@ -61,13 +78,51 @@ class DrugControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "customer", authorities = "CUSTOMER")
+    void createNewDrugAuthenticatedButNoRole() throws Exception {
+        //given
+        var drugDTO = new DrugDTO("Duxet", "duloxetine", "Bulgaria", 10.50);
+
+        //when
+        mvc.perform(post("/api/v1/drugs")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(drugDTO)))
+                .andExpect(status().isForbidden());
+    }
+
+    @Test
+    void createNewDrugAuthenticatedButUnauthorized() throws Exception {
+        //given
+        var drugDTO = new DrugDTO("Duxet", "duloxetine", "Bulgaria", 10.50);
+
+        //when
+        mvc.perform(post("/api/v1/drugs")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(drugDTO)))
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    @WithMockUser(username = "doctor", authorities = "DOCTOR")
     void getAllDrugs() throws Exception {
         //given
         var drugs = Arrays.asList(
                 new DrugDTO("Duxet", "duloxetine", "Bulgaria", 10.50),
                 new DrugDTO("Paracetamol", "paracetamol", "Bulgaria", 3.50));
 
-        drugs.forEach(drugDTO -> drugRepository.save(modelMapper.map(drugDTO, Drug.class)));
+        drugs.forEach(drugDTO -> {
+            try {
+                mvc.perform(post("/api/v1/drugs")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(drugDTO)))
+                        .andExpect(status().isCreated());
+            } catch (Exception e) {
+                fail();
+            }
+        });
 
         // when
         var response = mvc.perform(get("/api/v1/drugs/?page=0"))
@@ -77,17 +132,23 @@ class DrugControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "doctor", authorities = "DOCTOR")
     void updateDrugById() throws Exception {
         //given
         var drugInDatabase = new DrugDTO("Duxet", "duloxetine", "Bulgaria", 10.50);
-        drugRepository.save(modelMapper.map(drugInDatabase, Drug.class));
+
+        mvc.perform(post("/api/v1/drugs")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(drugInDatabase)))
+                .andExpect(status().isCreated());
 
         var newDrugInformation = new DrugDTO("Paracetamol", "paracetamol", "Bulgaria", 3.50);
 
         var drugInDatabaseWithId = drugRepository.findByName("Duxet")
                 .orElse(null);
         //when
-        assert drugInDatabaseWithId!=null;
+        assert drugInDatabaseWithId != null;
         var response = mvc.perform(put("/api/v1/drugs/{drugId}", drugInDatabaseWithId.getId())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsBytes(newDrugInformation)))
@@ -97,17 +158,22 @@ class DrugControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "doctor", authorities = "DOCTOR")
     void getDrugById() throws Exception {
         //given
         var drugInDatabase = new DrugDTO("Duxet", "duloxetine", "Bulgaria", 10.50);
-        var drug = modelMapper.map(drugInDatabase, Drug.class);
-        drugRepository.save(drug);
+
+        mvc.perform(post("/api/v1/drugs")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(drugInDatabase)))
+                .andExpect(status().isCreated());
 
         var drugInDatabaseWithId = drugRepository.findByName("Duxet")
                 .orElse(null);
 
         //when
-        assert drugInDatabaseWithId!=null;
+        assert drugInDatabaseWithId != null;
         var response = mvc.perform(get("/api/v1/drugs/{drugId}", drugInDatabaseWithId.getId()))
                 .andExpect(status().isOk())
                 .andReturn();
@@ -118,6 +184,7 @@ class DrugControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "doctor", authorities = "DOCTOR")
     void getDrugByIdThatNotExist() throws Exception {
         //when
         long invalidId = 100L;
@@ -128,23 +195,27 @@ class DrugControllerTests {
     }
 
     @Test
+    @WithMockUser(username = "doctor", authorities = "DOCTOR")
     void deleteDrugById() throws Exception {
         //given
         var drugInDatabase = new DrugDTO("Duxet", "duloxetine", "Bulgaria", 10.50);
-        var drug = modelMapper.map(drugInDatabase, Drug.class);
-        drugRepository.save(drug);
+
+        mvc.perform(post("/api/v1/drugs")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(drugInDatabase)))
+                .andExpect(status().isCreated());
 
         var drugInDatabaseWithId = drugRepository.findByName("Duxet")
                 .orElse(null);
         //when
-        assert drugInDatabaseWithId!=null;
+        assert drugInDatabaseWithId != null;
         var response = mvc.perform(delete("/api/v1/drugs/{drugId}", drugInDatabaseWithId.getId()))
                 .andExpect(status().isOk())
                 .andReturn();
 
         //then
         assertTrue(drugRepository.findById(drugInDatabaseWithId.getId()).isEmpty());
-        assertEquals(HttpStatus.OK.value(), response.getResponse().getStatus());
     }
 
 }

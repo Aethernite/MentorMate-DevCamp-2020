@@ -36,6 +36,10 @@ public class Drug extends BaseEntity {
     @Column(name = "country_of_origin")
     private String originCountry;
 
+    @NotBlank
+    @Size(min = 2, max = 50)
+    private String createdBy;
+
     @NotNull
     private double price;
 
@@ -49,6 +53,7 @@ public class Drug extends BaseEntity {
         this.chemicalName = updated.chemicalName;
         this.originCountry = updated.originCountry;
         this.price = updated.price;
+        this.createdBy = updated.createdBy;
     }
 
 }

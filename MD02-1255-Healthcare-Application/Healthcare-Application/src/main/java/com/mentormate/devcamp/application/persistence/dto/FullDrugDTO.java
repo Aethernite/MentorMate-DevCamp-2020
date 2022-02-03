@@ -7,10 +7,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
 /**
  * The Full Drug DTO.
  * <p>
@@ -22,22 +18,21 @@ import javax.validation.constraints.Size;
 @EqualsAndHashCode
 @Data
 public class FullDrugDTO {
+    @Schema(description = "The id of the drug in the database.")
     private Long id;
 
-    @NotNull
-    @Size(min = 3, max = 255)
+    @Schema(description = "The name of the drug.")
     private String name;
 
-    @NotNull
-    @Size(min = 3, max = 255)
-    @Column(name = "chemical_name")
+    @Schema(description = "The chemical name of the drug.")
     private String chemicalName;
 
-    @NotNull
-    @Size(min = 3, max = 255)
-    @Column(name = "country_of_origin")
+    @Schema(description = "The country of origin of the drug.")
     private String originCountry;
 
-    @NotNull
+    @Schema(description = "The price of the drug.")
     private double price;
+
+    @Schema(description = "The doctor that put the drug in the database.")
+    private String createdBy;
 }
