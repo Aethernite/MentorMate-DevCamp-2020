@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "author": "Shakespeare",
+        "title": "Hamlet",
+        "year": 1603
+    },
+    {
+        "id": 2,
+        "author": "Robert Lafore",
+        "title": "Data Structures and Algorithms Java",
+        "year": 2003
+    },
+    {
+        "id": 3,
+        "author": "Antoine de Saint-Exupéry",
+        "title": "Little Prince",
+        "year": 1943
+    },
+    {
+        "id": 4,
+        "author": "F. Scott Fitzgerald",
+        "title": "The Great Gatsby",
+        "year": 1603
+    }
+]
